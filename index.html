@@ -325,6 +325,23 @@
       .hero__bg video{ animation:none; }
       .btn, .pick{ transition:none; }
     }
+  
+    /* Rodapé delicado */
+    .siteFooter{
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: calc(12px + env(safe-area-inset-bottom));
+      text-align: center;
+      font-size: 12.5px;
+      line-height: 1.35;
+      color: rgba(244,244,248,.55);
+      letter-spacing: .01em;
+      padding: 0 14px;
+      pointer-events: none;
+      text-wrap: balance;
+    }
+
   </style>
 </head>
 
@@ -378,6 +395,11 @@
 
       <p class="fine">Para pessoas, empresas e parceiros.</p>
     </div>
+  
+    <footer class="siteFooter" aria-label="Direitos autorais">
+      © 2026 Todos os direitos reservados. Lencina Estrategia e Gestao de Negocios e Pessoas LTDA.
+    </footer>
+
   </main>
 
   <!-- MODAL: seleção de serviços -->
