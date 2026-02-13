@@ -198,7 +198,47 @@
       border-radius: 12px;
     }
 
-    /* ========= MODAL ========= */
+    
+    /* Chamada única clicável */
+    .headlineBtn{
+      width: min(860px, 100%);
+      margin: 0 auto;
+      border: 1px solid rgba(233,213,255,.24);
+      background: rgba(255,255,255,.05);
+      border-radius: 28px;
+      padding: clamp(18px, 3.2vw, 28px) clamp(18px, 4vw, 34px);
+      font-weight: 650;
+      font-size: clamp(22px, 3.2vw, 44px);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      color: var(--fg);
+      cursor: pointer;
+      text-align: center;
+      text-wrap: balance;
+      box-shadow: 0 16px 34px rgba(0,0,0,.35);
+      transition: transform .08s ease, background .18s ease, border-color .18s ease, filter .18s ease;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .headlineBtn:hover{
+      background: rgba(255,255,255,.08);
+      border-color: rgba(233,213,255,.42);
+      filter: brightness(1.03);
+    }
+    .headlineBtn:active{ transform: translateY(1px); }
+
+    .headlineBtn::after{
+      content:"";
+      display:block;
+      height: 2px;
+      width: clamp(140px, 26vw, 280px);
+      margin: 14px auto 0;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(124,58,237,.15), rgba(168,85,247,.85), rgba(233,213,255,.18));
+      opacity: .9;
+    }
+
+/* ========= MODAL ========= */
     .modal{
       position: fixed;
       inset: 0;
@@ -325,23 +365,6 @@
       .hero__bg video{ animation:none; }
       .btn, .pick{ transition:none; }
     }
-  
-    /* Rodapé delicado */
-    .siteFooter{
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: calc(12px + env(safe-area-inset-bottom));
-      text-align: center;
-      font-size: 12.5px;
-      line-height: 1.35;
-      color: rgba(244,244,248,.55);
-      letter-spacing: .01em;
-      padding: 0 14px;
-      pointer-events: none;
-      text-wrap: balance;
-    }
-
   </style>
 </head>
 
@@ -370,36 +393,11 @@
     <div class="hero__glow" aria-hidden="true"></div>
 
     <div class="wrap">
-      <!-- Textos: você pode ajustar livremente aqui -->
-      <p class="kicker">dados + método + desenvolvimento humano</p>
+      <button class="headlineBtn" type="button" id="openServices" aria-haspopup="dialog" aria-controls="servicesModal">
+        Clique para descomplicar o Desenvolvimento Humano no trabalho
+      </button>
 
-      <h1>
-        Desenvolvimento humano<br/>
-        <span>com impacto real.</span>
-      </h1>
-
-      <p class="sub">
-        Direção, processo e execução para transformar intenção em prática.
-      </p>
-
-      <div class="cta" aria-label="Ações principais">
-        <!-- Calendly: troque o href pelo seu link -->
-        <a class="btn btn--primary" href="https://calendly.com/" target="_blank" rel="noopener">
-          Agendar reunião
-        </a>
-
-        <button class="btn btn--ghost" type="button" id="openServices">
-          Ver serviços
-        </button>
-      </div>
-
-      <p class="fine">Para pessoas, empresas e parceiros.</p>
     </div>
-  
-    <footer class="siteFooter" aria-label="Direitos autorais">
-      © 2026 Todos os direitos reservados. Lencina Estrategia e Gestao de Negocios e Pessoas LTDA.
-    </footer>
-
   </main>
 
   <!-- MODAL: seleção de serviços -->
