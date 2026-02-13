@@ -1,1 +1,471 @@
 
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LENS Partner | Consultoria</title>
+  <meta name="description" content="Dados + método + desenvolvimento humano. Direção, processo e execução para transformar intenção em prática." />
+
+  <!-- Tipografia leve e elegante -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #07070b;
+      --fg: #f4f4f8;
+      --muted: rgba(244,244,248,.78);
+      --line: rgba(255,255,255,.16);
+
+      --violet1:#7c3aed;
+      --violet2:#a855f7;
+      --violet3:#e9d5ff;
+
+      --shadow: 0 18px 40px rgba(0,0,0,.45);
+      --r: 22px;
+      --max: 1120px;
+    }
+
+    *{ box-sizing:border-box; }
+    html, body{ height:100%; }
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      overflow-x:hidden;
+    }
+
+    /* ========= HERO ========= */
+    .hero{
+      min-height: 100svh;
+      position: relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: clamp(18px, 3vw, 36px);
+      isolation:isolate;
+    }
+
+    /* Fundo em vídeo */
+    .hero__bg{
+      position:absolute;
+      inset:0;
+      overflow:hidden;
+      z-index:-3;
+      background:
+        radial-gradient(1200px 700px at 20% 15%, rgba(124,58,237,.28), transparent 60%),
+        radial-gradient(900px 600px at 80% 85%, rgba(168,85,247,.22), transparent 55%),
+        linear-gradient(180deg, #06060a, #07070b 40%, #05050a);
+    }
+    .hero__bg video{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      filter: saturate(1.05) contrast(1.05) brightness(.92);
+      transform: scale(1.02);
+    }
+
+    /* Camada escura + roxo (para legibilidade) */
+    .hero__overlay{
+      position:absolute;
+      inset:0;
+      z-index:-2;
+      background:
+        linear-gradient(180deg, rgba(5,5,10,.70), rgba(5,5,10,.55) 40%, rgba(5,5,10,.72)),
+        radial-gradient(900px 520px at 55% 45%, rgba(124,58,237,.26), transparent 60%),
+        radial-gradient(750px 520px at 20% 70%, rgba(168,85,247,.20), transparent 55%);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    /* “Traços” luminosos discretos (estilo do print) */
+    .hero__glow{
+      position:absolute;
+      inset:-2px;
+      z-index:-1;
+      pointer-events:none;
+      opacity:.85;
+      mix-blend-mode: screen;
+      background:
+        radial-gradient(620px 200px at 20% 20%, rgba(233,213,255,.35), transparent 70%),
+        radial-gradient(520px 220px at 72% 70%, rgba(168,85,247,.28), transparent 72%);
+      filter: blur(0.2px);
+    }
+    .hero__glow::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cpath d='M-40 640 C 220 560 320 740 560 660 C 820 575 980 715 1220 640 C 1420 585 1520 610 1680 560' fill='none' stroke='rgba(233,213,255,0.35)' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M-60 720 C 220 660 360 820 620 730 C 880 645 1000 820 1300 700 C 1460 635 1540 660 1700 610' fill='none' stroke='rgba(168,85,247,0.32)' stroke-width='3.5' stroke-linecap='round'/%3E%3Cpath d='M-40 800 C 260 740 420 900 720 810 C 980 735 1080 900 1420 780 C 1540 730 1600 740 1720 700' fill='none' stroke='rgba(124,58,237,0.28)' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-size: cover;
+      background-position:center;
+      opacity:.55;
+      filter: blur(.2px);
+    }
+
+    /* Conteúdo central */
+    .wrap{
+      width:min(var(--max), 100%);
+      text-align:center;
+      padding: clamp(18px, 3.2vw, 34px) clamp(16px, 3vw, 28px);
+    }
+
+    .kicker{
+      font-size: clamp(14px, 1.25vw, 18px);
+      letter-spacing: .02em;
+      color: rgba(244,244,248,.78);
+      margin: 0 0 16px;
+      text-wrap: balance;
+    }
+
+    h1{
+      margin: 0 0 14px;
+      line-height: 1.03;
+      font-weight: 650;
+      font-size: clamp(42px, 5.2vw, 76px);
+      letter-spacing: -0.02em;
+      text-wrap: balance;
+    }
+    h1 span{
+      font-weight: 500;
+      opacity: .95;
+    }
+
+    .sub{
+      margin: 0 auto;
+      max-width: 60ch;
+      font-size: clamp(16px, 1.55vw, 20px);
+      line-height: 1.6;
+      color: rgba(244,244,248,.82);
+      text-wrap: balance;
+    }
+
+    .cta{
+      margin-top: clamp(22px, 3.2vw, 34px);
+      display:flex;
+      gap: 14px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      appearance:none;
+      border:1px solid transparent;
+      border-radius: 999px;
+      padding: 14px 22px;
+      font-weight: 600;
+      font-size: 16px;
+      cursor:pointer;
+      transition: transform .08s ease, filter .18s ease, background .18s ease, border-color .18s ease;
+      box-shadow: 0 10px 24px rgba(0,0,0,.25);
+      text-decoration:none;
+      color: var(--fg);
+      user-select:none;
+      min-width: 210px;
+    }
+    .btn:active{ transform: translateY(1px); }
+
+    .btn--primary{
+      background: linear-gradient(135deg, rgba(124,58,237,.95), rgba(168,85,247,.92));
+    }
+    .btn--primary:hover{ filter: brightness(1.06); }
+
+    .btn--ghost{
+      background: rgba(255,255,255,.06);
+      border-color: rgba(233,213,255,.35);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .btn--ghost:hover{
+      background: rgba(255,255,255,.09);
+      border-color: rgba(233,213,255,.55);
+    }
+
+    .fine{
+      margin: clamp(20px, 3vw, 30px) 0 0;
+      font-size: 16px;
+      color: rgba(244,244,248,.72);
+    }
+
+    /* Acessibilidade: foco visível */
+    :focus-visible{
+      outline: 3px solid rgba(233,213,255,.6);
+      outline-offset: 3px;
+      border-radius: 12px;
+    }
+
+    /* ========= MODAL ========= */
+    .modal{
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 50;
+    }
+    .modal[aria-hidden="false"]{ display:flex; }
+
+    .modal__backdrop{
+      position:absolute;
+      inset:0;
+      background: rgba(0,0,0,.62);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .modal__panel{
+      position: relative;
+      width: min(560px, 100%);
+      border-radius: var(--r);
+      border: 1px solid rgba(233,213,255,.20);
+      background:
+        linear-gradient(180deg, rgba(16,16,26,.86), rgba(10,10,18,.86)),
+        radial-gradient(650px 280px at 20% 20%, rgba(124,58,237,.22), transparent 70%),
+        radial-gradient(520px 280px at 80% 90%, rgba(168,85,247,.18), transparent 72%);
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+
+    .modal__top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .modal__title{
+      margin: 0;
+      font-size: 18px;
+      font-weight: 650;
+      letter-spacing: -0.01em;
+    }
+    .modal__desc{
+      margin: 0 0 16px;
+      color: rgba(244,244,248,.78);
+      line-height: 1.55;
+      font-size: 14.5px;
+    }
+
+    .iconBtn{
+      border: 1px solid rgba(233,213,255,.22);
+      background: rgba(255,255,255,.06);
+      color: var(--fg);
+      border-radius: 12px;
+      width: 40px;
+      height: 40px;
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      transition: background .18s ease, border-color .18s ease;
+    }
+    .iconBtn:hover{ background: rgba(255,255,255,.09); border-color: rgba(233,213,255,.36); }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .pick{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      border-radius: 16px;
+      padding: 14px 14px;
+      border: 1px solid rgba(233,213,255,.18);
+      background: rgba(255,255,255,.05);
+      text-decoration:none;
+      color: var(--fg);
+      transition: background .18s ease, border-color .18s ease, transform .08s ease;
+    }
+    .pick:hover{
+      background: rgba(255,255,255,.08);
+      border-color: rgba(233,213,255,.34);
+    }
+    .pick:active{ transform: translateY(1px); }
+
+    .pick strong{
+      font-size: 16px;
+      font-weight: 650;
+      letter-spacing: -0.01em;
+    }
+    .pick span{
+      display:block;
+      font-size: 13.5px;
+      color: rgba(244,244,248,.72);
+      margin-top: 2px;
+      line-height: 1.35;
+    }
+    .arrow{
+      opacity:.8;
+      font-size: 18px;
+      padding: 0 4px;
+    }
+
+    /* Mobile: botões não “quebram” */
+    @media (max-width: 420px){
+      .btn{ width: 100%; min-width: 0; }
+      .wrap{ padding-inline: 10px; }
+    }
+
+    /* Respeitar preferência do usuário */
+    @media (prefers-reduced-motion: reduce){
+      .hero__bg video{ animation:none; }
+      .btn, .pick{ transition:none; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HERO / WELCOME -->
+  <main class="hero" aria-label="Boas-vindas">
+    <div class="hero__bg" aria-hidden="true">
+      <!--
+        IMPORTANTE (GitHub Pages):
+        - Coloque o vídeo em: /assets/video/DHO_pessoas_rh_estratégia.mp4
+        - Se preferir outro nome, atualize o src abaixo.
+      -->
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="assets/video/poster.jpg"
+      >
+        <source src="assets/video/DHO_pessoas_rh_estratégia.mp4" type="video/mp4" />
+      </video>
+    </div>
+
+    <div class="hero__overlay" aria-hidden="true"></div>
+    <div class="hero__glow" aria-hidden="true"></div>
+
+    <div class="wrap">
+      <!-- Textos: você pode ajustar livremente aqui -->
+      <p class="kicker">dados + método + desenvolvimento humano</p>
+
+      <h1>
+        Desenvolvimento humano<br/>
+        <span>com impacto real.</span>
+      </h1>
+
+      <p class="sub">
+        Direção, processo e execução para transformar intenção em prática.
+      </p>
+
+      <div class="cta" aria-label="Ações principais">
+        <!-- Calendly: troque o href pelo seu link -->
+        <a class="btn btn--primary" href="https://calendly.com/" target="_blank" rel="noopener">
+          Agendar reunião
+        </a>
+
+        <button class="btn btn--ghost" type="button" id="openServices">
+          Ver serviços
+        </button>
+      </div>
+
+      <p class="fine">Para pessoas, empresas e parceiros.</p>
+    </div>
+  </main>
+
+  <!-- MODAL: seleção de serviços -->
+  <section class="modal" id="servicesModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="servicesTitle">
+    <div class="modal__backdrop" data-close></div>
+
+    <div class="modal__panel" role="document">
+      <div class="modal__top">
+        <div>
+          <h2 class="modal__title" id="servicesTitle">Escolha seu caminho</h2>
+        </div>
+        <button class="iconBtn" type="button" aria-label="Fechar" data-close>
+          ✕
+        </button>
+      </div>
+
+      <p class="modal__desc">
+        Selecione o tipo de serviço. Cada opção levará para uma página dedicada (você pode criar depois).
+      </p>
+
+      <div class="grid" aria-label="Opções de serviços">
+        <a class="pick" href="pessoas.html">
+          <div>
+            <strong>Para pessoas</strong>
+            <span>Carreira, repertório e execução com método.</span>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="pick" href="empresas.html">
+          <div>
+            <strong>Para empresas</strong>
+            <span>Diagnóstico, estratégia e desenvolvimento organizacional.</span>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="pick" href="parceiros.html">
+          <div>
+            <strong>Para parceiros</strong>
+            <span>Projetos em conjunto e alavancas de impacto.</span>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function(){
+      const modal = document.getElementById('servicesModal');
+      const openBtn = document.getElementById('openServices');
+      const closeTargets = modal.querySelectorAll('[data-close]');
+      let lastFocus = null;
+
+      function openModal(){
+        lastFocus = document.activeElement;
+        modal.setAttribute('aria-hidden', 'false');
+
+        // Foco no primeiro item clicável dentro do modal
+        const focusable = modal.querySelector('button, a, [tabindex]:not([tabindex="-1"])');
+        if(focusable) focusable.focus();
+
+        document.addEventListener('keydown', onKeydown);
+      }
+
+      function closeModal(){
+        modal.setAttribute('aria-hidden', 'true');
+        document.removeEventListener('keydown', onKeydown);
+        if(lastFocus) lastFocus.focus();
+      }
+
+      function onKeydown(e){
+        if(e.key === 'Escape'){
+          closeModal();
+        }
+      }
+
+      openBtn.addEventListener('click', openModal);
+
+      closeTargets.forEach(el => {
+        el.addEventListener('click', closeModal);
+      });
+
+      // Fecha ao clicar fora do painel
+      modal.addEventListener('click', (e) => {
+        if(e.target === modal) closeModal();
+      });
+
+      // Se a página for carregada com #servicos, abre modal (opcional)
+      if(location.hash === '#servicos'){
+        openModal();
+      }
+    })();
+  </script>
+</body>
+</html>
