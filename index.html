@@ -76,12 +76,12 @@
       inset:0;
       z-index:-2;
       background:
-        linear-gradient(180deg, rgba(5,5,10,.70), rgba(5,5,10,.55) 40%, rgba(5,5,10,.72)),
+        linear-gradient(180deg, rgba(32,18,52,.62), rgba(32,18,52,.47) 40%, rgba(32,18,52,.64)),
         radial-gradient(900px 520px at 55% 45%, rgba(124,58,237,.26), transparent 60%),
         radial-gradient(750px 520px at 20% 70%, rgba(168,85,247,.20), transparent 55%);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-    }
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      }
 
     /* “Traços” luminosos discretos (estilo do print) */
     .hero__glow{
@@ -108,6 +108,126 @@
     }
 
     /* Conteúdo central */
+
+    /* Chamada central (inspirada no print 2) */
+    .heroCall{
+      appearance:none;
+      border: 1px solid transparent;
+      background: transparent;
+      border-radius: 28px;
+      padding: clamp(18px, 3.2vw, 28px) clamp(18px, 4.8vw, 40px);
+      width: min(920px, 100%);
+      margin: -3vh auto 0;
+      cursor: pointer;
+      text-align: center;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      transition: transform .08s ease, background .18s ease, border-color .18s ease, filter .18s ease;
+    }
+    .heroCall:hover{
+      background: transparent;
+      border-color: transparent;
+      filter: brightness(1.04);
+    }
+    .heroCall:active{ transform: translateY(1px); }
+
+    
+    
+    /* Farol de referência */
+    .heroBeacon{
+      display: inline-block;
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: rgba(168,85,247,.95);
+      box-shadow:
+        0 0 0 6px rgba(168,85,247,.16),
+        0 0 18px rgba(168,85,247,.55);
+      animation: beaconPulse 1.8s ease-in-out infinite;
+    }
+    @keyframes beaconPulse{
+      0%, 100%{
+        transform: scale(1);
+        box-shadow:
+          0 0 0 6px rgba(168,85,247,.16),
+          0 0 18px rgba(168,85,247,.55);
+        opacity: .95;
+      }
+      50%{
+        transform: scale(1.08);
+        box-shadow:
+          0 0 0 10px rgba(168,85,247,.10),
+          0 0 26px rgba(168,85,247,.62);
+        opacity: 1;
+      }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .heroBeacon{ animation: none; }
+    }
+/* Remove qualquer borda/outline ao clicar (focus) */
+    .heroCall:focus,
+    .heroCall:focus-visible{
+      outline: none !important;
+      box-shadow: none !important;
+    }
+    .heroCall{
+      -webkit-tap-highlight-color: transparent;
+    }
+.heroCall__small{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-weight: 650;
+      font-size: clamp(16px, 2.0vw, 26px);
+      letter-spacing: .01em;
+      color: rgba(244,244,248,.86);
+      margin-bottom: clamp(6px, 1.1vw, 10px);
+    }
+
+    .heroCall__big{
+      display:block;
+      font-weight: 750;
+      font-size: clamp(44px, 7.0vw, 94px);
+      letter-spacing: -0.03em;
+      line-height: .95;
+      color: rgba(244,244,248,.98);
+      text-wrap: balance;
+    }
+
+    .heroCall__outline{
+      display:block;
+      font-weight: 750;
+      font-size: clamp(30px, 5.2vw, 68px);
+      letter-spacing: -0.02em;
+      line-height: 1.02;
+      color: transparent;
+      -webkit-text-stroke: 1.4px rgba(244,244,248,.92);
+      text-stroke: 1.4px rgba(244,244,248,.92);
+      opacity: .92;
+      margin-top: clamp(8px, 1.2vw, 12px);
+      text-wrap: balance;
+    }
+
+    .heroCall__tail{
+      display:block;
+      margin-top: clamp(10px, 1.4vw, 14px);
+      font-weight: 650;
+      font-size: clamp(18px, 2.4vw, 30px);
+      letter-spacing: -0.01em;
+      color: rgba(233,213,255,.92);
+    }
+
+    /* Mobile: reduz stroke para ficar mais delicado */
+    @media (max-width: 420px){
+      .heroCall{ border-radius: 22px; }
+      .heroCall__outline{
+        -webkit-text-stroke: 1.1px rgba(244,244,248,.92);
+        text-stroke: 1.1px rgba(244,244,248,.92);
+      }
+    }
+
     .wrap{
       width:min(var(--max), 100%);
       text-align:center;
@@ -177,9 +297,9 @@
     .btn--ghost{
       background: rgba(255,255,255,.06);
       border-color: rgba(233,213,255,.35);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      }
     .btn--ghost:hover{
       background: rgba(255,255,255,.09);
       border-color: rgba(233,213,255,.55);
@@ -199,46 +319,303 @@
     }
 
     
-    /* Chamada única clicável */
-    .headlineBtn{
-      width: min(860px, 100%);
-      margin: 0 auto;
-      border: 1px solid rgba(233,213,255,.24);
-      background: rgba(255,255,255,.05);
-      border-radius: 28px;
-      padding: clamp(18px, 3.2vw, 28px) clamp(18px, 4vw, 34px);
-      font-weight: 650;
-      font-size: clamp(22px, 3.2vw, 44px);
-      line-height: 1.12;
-      letter-spacing: -0.02em;
-      color: var(--fg);
-      cursor: pointer;
-      text-align: center;
-      text-wrap: balance;
-      box-shadow: 0 16px 34px rgba(0,0,0,.35);
-      transition: transform .08s ease, background .18s ease, border-color .18s ease, filter .18s ease;
+    /* Botões de ação (desktop canto / mobile central) */
+    .cornerCtas{
+      position: absolute;
+      top: clamp(18px, 3vw, 34px);
+      right: clamp(18px, 3vw, 34px);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 6;
+      align-items: stretch;
+      pointer-events: auto;
+    }
+    .cornerCtas a{
+      width: 190px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(233,213,255,.26);
+      background: rgba(255,255,255,.06);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
+      color: rgba(244,244,248,.92);
+      text-decoration: none;
+      text-align: center;
+      font-weight: 650;
+      font-size: 14.5px;
+      letter-spacing: .01em;
+      box-shadow: 0 14px 28px rgba(0,0,0,.22);
+      transition: transform .08s ease, background .18s ease, border-color .18s ease, filter .18s ease;
+      user-select: none;
     }
-    .headlineBtn:hover{
-      background: rgba(255,255,255,.08);
+    .cornerCtas a:hover{
+      background: rgba(255,255,255,.09);
       border-color: rgba(233,213,255,.42);
-      filter: brightness(1.03);
+      filter: brightness(1.02);
     }
-    .headlineBtn:active{ transform: translateY(1px); }
+    .cornerCtas a:active{ transform: translateY(1px); }
 
-    .headlineBtn::after{
-      content:"";
-      display:block;
-      height: 2px;
-      width: clamp(140px, 26vw, 280px);
-      margin: 14px auto 0;
+    /* Mobile: centraliza abaixo do texto */
+    @media (max-width: 720px){
+      .cornerCtas{
+        position: static;
+        width: min(272px, 100%);
+        margin: 18px auto 0;
+      }
+      .cornerCtas a{
+        width: 100%;
+      }
+    }
+
+    
+    /* Botões de redes sociais */
+    .socialLinks{
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: calc(92px + env(safe-area-inset-bottom));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      z-index: 6;
+      pointer-events: auto;
+    }
+    .socialLinks a{
+      width: 34px;
+      height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      border: 1px solid rgba(244,244,248,.82);
+      background: rgba(244,244,248,.92);
+      box-shadow: 0 10px 18px rgba(0,0,0,.16);
+      color: rgba(18,18,28,.78);
+      text-decoration: none;
+      transition: transform .08s ease, background .18s ease, border-color .18s ease, filter .18s ease;
+      user-select: none;
+    }
+    .socialLinks a:hover{
+      background: rgba(244,244,248,.98);
+      border-color: rgba(233,213,255,.55);
+      filter: brightness(1.01);
+    }
+    .socialLinks a:active{ transform: translateY(1px); }
+    .socialLinks svg{
+      width: 18px;
+      height: 18px;
+      display: block;
+    }
+
+    /* Mobile: entra no fluxo, abaixo dos botões */
+    @media (max-width: 720px){
+      .socialLinks{
+        position: static;
+        left: auto;
+        transform: none;
+        bottom: auto;
+        width: fit-content;
+        margin: 18px auto 0;
+      }
+    }
+
+    
+    
+    /* Correção de texto em listas (select/options) */
+    .controlSelect{
+      color: rgba(244,244,248,.92);
+      color-scheme: dark;
+    }
+    .controlSelect option{
+      color: #111 !important; /* dropdown nativo costuma ser claro */
+      background: #fff !important;
+    }
+    .controlSelect option:disabled{
+      color: #666 !important;
+    }
+
+    /* Formulário de inscrição */
+    .form{
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .formRow{
+      display: grid;
+      gap: 10px;
+    }
+    @media (min-width: 720px){
+      .formRow.cols2{ grid-template-columns: 1fr 1fr; }
+      .formRow.cols3{ grid-template-columns: 1.1fr .9fr 1fr; }
+    }
+    .field{
+      display: grid;
+      gap: 6px;
+    }
+    .field label{
+      font-size: 13px;
+      color: rgba(244,244,248,.78);
+      letter-spacing: .01em;
+    }
+    .control,
+    .controlSelect,
+    .controlArea{
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid rgba(233,213,255,.18);
+      background: rgba(255,255,255,.06);
+      color: rgba(244,244,248,.92);
+      padding: 12px 12px;
+      outline: none;
+      box-shadow: 0 10px 18px rgba(0,0,0,.16);
+      transition: border-color .18s ease, background .18s ease, filter .18s ease;
+    }
+    
+    /* Padronização de altura (mais compacta) */
+    .control,
+    .controlSelect{
+      height: 42px;
+      min-height: 42px;
+      padding: 0 12px;
+      line-height: 42px;
+      font-size: 14px;
+    }
+    .controlSelect{
+      padding: 0 36px 0 10px; /* espaço para a setinha */
+      line-height: 42px;
+    }
+
+    /* mantém textarea confortável */
+    .controlArea{
+      padding: 10px 12px;
+      min-height: 108px;
+      line-height: 1.45;
+    }
+.controlSelect{ padding: 12px 10px; }
+    .controlArea{
+      min-height: 108px;
+      resize: vertical;
+      line-height: 1.45;
+    }
+    .control::placeholder,
+    .controlArea::placeholder{
+      color: rgba(244,244,248,.46);
+    }
+    .control:focus,
+    .controlSelect:focus,
+    .controlArea:focus{
+      border-color: rgba(168,85,247,.45);
+      background: rgba(255,255,255,.08);
+      filter: brightness(1.01);
+    }
+    .help{
+      font-size: 12px;
+      color: rgba(244,244,248,.55);
+      line-height: 1.35;
+    }
+    .checks{
+      display: grid;
+      gap: 10px;
+      margin-top: 4px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+    .checkLine{
+      display: grid;
+      grid-template-columns: 18px 1fr;
+      gap: 10px;
+      align-items: start;
+      font-size: 12.5px;
+      color: rgba(244,244,248,.72);
+      line-height: 1.35;
+    }
+    .checkLine input{ margin-top: 2px; }
+    .checkLine a{
+      color: rgba(233,213,255,.85);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(233,213,255,.28);
+      padding-bottom: 1px;
+    }
+    .checkLine a:hover{
+      border-color: rgba(233,213,255,.48);
+    }
+    .formActions{
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      align-items: center;
+      margin-top: 4px;
+      flex-wrap: wrap;
+    }
+    .btn{
+      border: 1px solid rgba(233,213,255,.22);
+      background: rgba(255,255,255,.06);
+      color: rgba(244,244,248,.92);
       border-radius: 999px;
-      background: linear-gradient(90deg, rgba(124,58,237,.15), rgba(168,85,247,.85), rgba(233,213,255,.18));
-      opacity: .9;
+      padding: 11px 16px;
+      font-weight: 700;
+      letter-spacing: .01em;
+      cursor: pointer;
+      transition: transform .08s ease, background .18s ease, border-color .18s ease, filter .18s ease;
+    }
+    .btn:hover{
+      background: rgba(255,255,255,.09);
+      border-color: rgba(233,213,255,.40);
+      filter: brightness(1.02);
+    }
+    .btn:active{ transform: translateY(1px); }
+    .btnPrimary{
+      border-color: rgba(168,85,247,.45);
+      background: linear-gradient(90deg, rgba(124,58,237,.72), rgba(168,85,247,.72));
+    }
+    .btnPrimary:hover{
+      filter: brightness(1.04);
+      border-color: rgba(233,213,255,.52);
+    }
+    .formNote{
+      font-size: 12px;
+      color: rgba(244,244,248,.56);
+      margin-top: 6px;
+    }
+    .toast{
+      display:none;
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(233,213,255,.18);
+      background: rgba(255,255,255,.06);
+      color: rgba(244,244,248,.86);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+    .toast.show{ display:block; }
+
+    /* travar scroll do fundo quando modal estiver aberto */
+    .noScroll{ overflow: hidden; }
+
+    /* ========= MODAL ========= */
+
+    /* Ajuste mobile: rolagem do modal */
+    .modal{
+      padding: 18px 14px calc(18px + env(safe-area-inset-bottom));
+      box-sizing: border-box;
+    }
+    .modal__panel{
+      max-height: calc(100dvh - 36px - env(safe-area-inset-bottom));
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    @media (max-width: 720px){
+      .modal{
+        align-items: flex-start;
+      }
+      .modal__panel{
+        width: 100%;
+      }
     }
 
-/* ========= MODAL ========= */
     .modal{
       position: fixed;
       inset: 0;
@@ -254,9 +631,9 @@
       position:absolute;
       inset:0;
       background: rgba(0,0,0,.62);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      }
 
     .modal__panel{
       position: relative;
@@ -365,6 +742,67 @@
       .hero__bg video{ animation:none; }
       .btn, .pick{ transition:none; }
     }
+  
+    
+    /* Links legais (discretos, acima do rodapé) */
+    .legalLinks{
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: calc(38px + env(safe-area-inset-bottom));
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 0 14px;
+      font-size: 12.5px;
+      line-height: 1.35;
+      color: rgba(244,244,248,.52);
+      letter-spacing: .01em;
+      z-index: 5;
+      pointer-events: auto;
+    }
+    .legalLinks a{
+      color: rgba(244,244,248,.52);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(244,244,248,.14);
+      padding-bottom: 1px;
+      transition: color .18s ease, border-color .18s ease, filter .18s ease;
+    }
+    .legalLinks a:hover{
+      color: rgba(244,244,248,.74);
+      border-color: rgba(233,213,255,.34);
+      filter: brightness(1.02);
+    }
+    .legalLinks__sep{
+      opacity: .55;
+      user-select: none;
+    }
+    @media (max-width: 420px){
+      .legalLinks{
+        bottom: calc(46px + env(safe-area-inset-bottom));
+        font-size: 12px;
+        gap: 8px;
+      }
+    }
+
+    /* Rodapé delicado */
+    .siteFooter{
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: calc(12px + env(safe-area-inset-bottom));
+      text-align: center;
+      font-size: 12.5px;
+      line-height: 1.35;
+      color: rgba(244,244,248,.55);
+      letter-spacing: .01em;
+      padding: 0 14px;
+      pointer-events: none;
+      text-wrap: balance;
+    }
+
   </style>
 </head>
 
@@ -393,12 +831,210 @@
     <div class="hero__glow" aria-hidden="true"></div>
 
     <div class="wrap">
-      <button class="headlineBtn" type="button" id="openServices" aria-haspopup="dialog" aria-controls="servicesModal">
-        Clique para descomplicar o Desenvolvimento Humano no trabalho
+      <button class="heroCall" type="button" id="openServices" aria-haspopup="dialog" aria-controls="servicesModal" aria-label="Clique para descomplicar o Desenvolvimento Humano no Trabalho">
+        <span class="heroCall__small"><span class="heroBeacon" aria-hidden="true"></span>Clique para</span>
+        <span class="heroCall__big">descomplicar</span>
+        <span class="heroCall__outline">o Desenvolvimento Humano</span>
+        <span class="heroCall__tail">no Trabalho</span>
+</span>
       </button>
 
+      <!-- Ações rápidas -->
+      <nav class="cornerCtas" aria-label="Ações rápidas">
+        <a href="#inscricao" id="openSignup">Inscreva-se</a>
+        <a href="https://calendly.com/" target="_blank" rel="noopener">Agendar conversa</a>
+        <a href="conteudos.html">Conteúdos</a>
+      </nav>
+
+      <!-- Redes sociais -->
+      <nav class="socialLinks" aria-label="Redes sociais">
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0.5 23.5h4V7.5h-4v16zM8 7.5h3.84v2.19h.05c.53-1 1.84-2.06 3.79-2.06 4.06 0 4.82 2.67 4.82 6.14v9.73h-4v-8.63c0-2.06-.04-4.71-2.87-4.71-2.87 0-3.31 2.24-3.31 4.56v8.78H8v-16z"/>
+          </svg>
+        </a>
+
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 4.2A3.8 3.8 0 1 1 8.2 12 3.8 3.8 0 0 1 12 8.2zm0 2A1.8 1.8 0 1 0 13.8 12 1.8 1.8 0 0 0 12 10.2zM17.6 6.3a1 1 0 1 1-1 1 1 1 0 0 1 1-1z"/>
+          </svg>
+        </a>
+
+        <a href="https://wa.me/" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M20.52 3.48A11.94 11.94 0 0 0 12.03 0C5.45 0 .12 5.33.12 11.91c0 2.1.55 4.15 1.6 5.97L0 24l6.32-1.66a11.86 11.86 0 0 0 5.71 1.46h.01c6.58 0 11.91-5.33 11.91-11.91 0-3.18-1.24-6.17-3.43-8.41zM12.03 21.8h-.01a9.9 9.9 0 0 1-5.04-1.38l-.36-.22-3.75.98 1-3.65-.23-.37a9.88 9.88 0 0 1-1.51-5.25c0-5.46 4.45-9.91 9.92-9.91a9.84 9.84 0 0 1 7 2.9 9.84 9.84 0 0 1 2.9 7c0 5.46-4.45 9.9-9.91 9.9zm5.44-7.41c-.3-.15-1.76-.87-2.03-.97-.27-.1-.46-.15-.66.15-.2.3-.76.97-.93 1.17-.17.2-.34.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.64-2.06-.17-.3-.02-.46.13-.6.13-.13.3-.34.44-.5.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.66-1.59-.9-2.18-.24-.58-.49-.5-.66-.5h-.57c-.2 0-.52.07-.8.37-.27.3-1.05 1.03-1.05 2.52s1.08 2.92 1.23 3.12c.15.2 2.12 3.23 5.14 4.53.72.31 1.27.5 1.7.64.71.23 1.35.2 1.86.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35z"/>
+          </svg>
+        </a>
+
+        <a href="https://x.com/" target="_blank" rel="noopener" aria-label="X">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M18.9 2H22l-6.78 7.75L23.2 22h-6.4l-5.02-6.62L5.9 22H2.8l7.27-8.31L0.4 2h6.56l4.54 5.99L18.9 2zm-1.12 18h1.77L7.45 3.92H5.55L17.78 20z"/>
+          </svg>
+        </a>
+      </nav>
+
+
     </div>
+  
+    
+    <nav class="legalLinks" aria-label="Links legais">
+      <a href="termos.html">Termos de uso</a>
+      <span class="legalLinks__sep" aria-hidden="true">|</span>
+      <a href="privacidade.html">Privacidade</a>
+      <span class="legalLinks__sep" aria-hidden="true">|</span>
+      <a href="cookies.html">Política de cookies</a>
+      <span class="legalLinks__sep" aria-hidden="true">|</span>
+      <a href="cookies-preferencias.html">Preferências de cookies</a>
+    </nav>
+
+<footer class="siteFooter" aria-label="Direitos autorais">
+      © 2026 Todos os direitos reservados. Lencina Estrategia e Gestao de Negocios e Pessoas LTDA.
+    </footer>
+
   </main>
+
+  
+  <!-- MODAL: inscrição -->
+  <section class="modal" id="signupModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="signupTitle">
+    <div class="modal__backdrop" data-close-signup></div>
+
+    <div class="modal__panel" role="document">
+      <div class="modal__top">
+        <div>
+          <h2 class="modal__title" id="signupTitle">Inscreva-se</h2>
+        </div>
+        <button class="iconBtn" type="button" aria-label="Fechar" data-close-signup>
+          ✕
+        </button>
+      </div>
+
+      <p class="modal__desc">
+        Deixe seus dados para receber novidades, convites e próximos passos. É simples e rápido.
+      </p>
+
+      <form class="form" id="signupForm" autocomplete="on" novalidate>
+        <div class="formRow">
+          <div class="field">
+            <label for="fullName">Nome completo</label>
+            <input class="control" id="fullName" name="nome_completo" type="text" placeholder="Seu nome e sobrenome" required />
+          </div>
+        </div>
+
+        <div class="formRow cols2">
+          <div class="field">
+            <label for="email">Melhor e-mail</label>
+            <input class="control" id="email" name="email" type="email" placeholder="voce@exemplo.com" required />
+          </div>
+
+          <div class="field">
+            <label for="country">País</label>
+            <select class="controlSelect" id="country" name="pais" required>
+              <option value="" selected disabled>Selecione</option>
+              <option value="BR">Brasil</option>
+              <option value="PT">Portugal</option>
+              <option value="US">Estados Unidos</option>
+              <option value="CA">Canadá</option>
+              <option value="UK">Reino Unido</option>
+              <option value="ES">Espanha</option>
+              <option value="DE">Alemanha</option>
+              <option value="AR">Argentina</option>
+              <option value="CL">Chile</option>
+              <option value="MX">México</option>
+              <option value="OTHER">Outro</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="formRow">
+          <div class="field">
+            <label for="city">Cidade</label>
+            <input class="control" id="city" name="cidade" list="citiesList" placeholder="Selecione ou digite" required />
+            <datalist id="citiesList">
+              <option value="São Paulo - SP"></option>
+              <option value="Rio de Janeiro - RJ"></option>
+              <option value="Belo Horizonte - MG"></option>
+              <option value="Curitiba - PR"></option>
+              <option value="Porto Alegre - RS"></option>
+              <option value="Florianópolis - SC"></option>
+              <option value="Brasília - DF"></option>
+              <option value="Salvador - BA"></option>
+              <option value="Recife - PE"></option>
+              <option value="Fortaleza - CE"></option>
+              <option value="Campinas - SP"></option>
+              <option value="Santos - SP"></option>
+              <option value="Niterói - RJ"></option>
+              <option value="Outra (digitar)"></option>
+            </datalist>
+            <div class="help">Dica: você pode digitar para encontrar mais rápido.</div>
+          </div>
+        </div>
+
+        <div class="formRow cols3">
+          <div class="field">
+            <label for="dialCode">Caixa postal</label>
+            <select class="controlSelect" id="dialCode" name="codigo_pais" required>
+              <option value="+55" selected>+55 (BR)</option>
+              <option value="+351">+351 (PT)</option>
+              <option value="+1">+1 (US/CA)</option>
+              <option value="+44">+44 (UK)</option>
+              <option value="+34">+34 (ES)</option>
+              <option value="+49">+49 (DE)</option>
+              <option value="+54">+54 (AR)</option>
+              <option value="+56">+56 (CL)</option>
+              <option value="+52">+52 (MX)</option>
+              <option value="+000">Outro</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="ddd">DDD</label>
+            <select class="controlSelect" id="ddd" name="ddd" required>
+              <option value="" disabled selected>Selecione</option>
+              <option>11</option><option>21</option><option>31</option><option>41</option><option>51</option>
+              <option>61</option><option>71</option><option>81</option><option>85</option><option>91</option>
+              <option>19</option><option>27</option><option>47</option><option>48</option><option>62</option>
+              <option>63</option><option>64</option><option>65</option><option>67</option><option>79</option>
+              <option>82</option><option>83</option><option>84</option><option>86</option><option>92</option>
+              <option>93</option><option>95</option><option>98</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="phone">Melhor telefone</label>
+            <input class="control" id="phone" name="telefone" type="tel" placeholder="9 9999-9999" required />
+          </div>
+        </div>
+
+        <div class="formRow">
+          <div class="field">
+            <label for="interest">Descrição do interesse</label>
+            <textarea class="controlArea" id="interest" name="interesse" placeholder="Conte em 1–3 linhas o que você quer destravar no trabalho." required></textarea>
+          </div>
+        </div>
+
+        <div class="checks" aria-label="Termos de aceite">
+          <label class="checkLine">
+            <input type="checkbox" name="consentimento" required />
+            <span>Eu concordo com os <a href="termos.html">Termos de uso</a> e com a <a href="privacidade.html">Política de Privacidade</a>, e autorizo o tratamento dos meus dados para contato e envio de informações.</span>
+          </label>
+
+          <label class="checkLine">
+            <input type="checkbox" name="conteudos" />
+            <span>Quero receber conteúdos e atualizações (opcional).</span>
+          </label>
+        </div>
+
+        <div class="formActions">
+          <button class="btn" type="button" data-close-signup>Cancelar</button>
+          <button class="btn btnPrimary" type="submit">Enviar</button>
+        </div>
+
+        <div class="formNote">Observação: por enquanto, este formulário está preparado para a interface. A integração de envio (ex.: Formspree/Sheets) entra na próxima etapa.</div>
+        <div class="toast" id="signupToast" role="status" aria-live="polite">Cadastro recebido. Obrigada! Em breve entraremos em contato.</div>
+      </form>
+    </div>
+  </section>
+
 
   <!-- MODAL: seleção de serviços -->
   <section class="modal" id="servicesModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="servicesTitle">
@@ -492,6 +1128,77 @@
         openModal();
       }
     })();
+  
+    (function(){
+      const modal = document.getElementById('signupModal');
+      const openBtn = document.getElementById('openSignup');
+      const closeTargets = modal.querySelectorAll('[data-close-signup]');
+      const form = document.getElementById('signupForm');
+      const toast = document.getElementById('signupToast');
+      let lastFocus = null;
+
+      function openModal(){
+        lastFocus = document.activeElement;
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('noScroll');
+
+        const focusable = modal.querySelector('input, select, textarea, button, a, [tabindex]:not([tabindex="-1"])');
+        if(focusable) focusable.focus();
+
+        document.addEventListener('keydown', onKeydown);
+      }
+
+      function closeModal(){
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('noScroll');
+        document.removeEventListener('keydown', onKeydown);
+        if(lastFocus) lastFocus.focus();
+      }
+
+      function onKeydown(e){
+        if(e.key === 'Escape'){
+          closeModal();
+        }
+      }
+
+      openBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal();
+      });
+
+      closeTargets.forEach(el => el.addEventListener('click', closeModal));
+
+      // Fecha ao clicar fora do painel
+      modal.addEventListener('click', (e) => {
+        if(e.target === modal) closeModal();
+      });
+
+      // Submit (apenas UI nesta etapa)
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Validação simples
+        if(!form.checkValidity()){
+          form.reportValidity();
+          return;
+        }
+
+        toast.classList.add('show');
+
+        // Fecha após um instante (mantém sensação "delicada")
+        setTimeout(() => {
+          closeModal();
+          toast.classList.remove('show');
+          form.reset();
+        }, 1200);
+      });
+
+      // Abre se vier com hash
+      if(location.hash === '#inscricao'){
+        openModal();
+      }
+    })();
+
   </script>
 </body>
 </html>
