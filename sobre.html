@@ -1,0 +1,4889 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lens by Lis | Sobre nós</title>
+  <meta name="description"
+    content="Sobre nós. Direção, processo e execução para descomplicar o desenvolvimento humano no trabalho." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #07070b;
+      --fg: #f4f4f8;
+      --muted: rgba(244, 244, 248, .78);
+      --line: rgba(255, 255, 255, .16);
+
+      --violet1: #7c3aed;
+      --violet2: #a855f7;
+      --violet3: #e9d5ff;
+
+      --shadow: 0 18px 40px rgba(0, 0, 0, .45);
+      --r: 22px;
+      --max: 1120px;
+
+      --panelBg: rgba(12, 12, 18, .62);
+      --panelBorder: rgba(233, 213, 255, .16);
+
+
+      --pitaya: #ff4fa3;
+      --aboutPhoto: url("assets/imagens/partner-people-business-dho.jpg");
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    .wrap {
+      width: min(var(--max), 100%);
+      margin: 0 auto;
+    }
+
+    /* ========= FUNDO (gradiente + glow com micro movimento) ========= */
+    .about {
+      height: 100svh;
+      position: relative;
+      padding: clamp(14px, 2.6vw, 28px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .about__bg {
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+      background:
+        radial-gradient(1200px 700px at 18% 12%, rgba(124, 58, 237, .28), transparent 60%),
+        radial-gradient(900px 620px at 82% 82%, rgba(168, 85, 247, .20), transparent 58%),
+        radial-gradient(520px 420px at 55% 42%, rgba(233, 213, 255, .12), transparent 62%),
+        linear-gradient(180deg, #06060a, #07070b 40%, #05050a);
+      background-size: 140% 140%;
+      animation: bgDrift 22s ease-in-out infinite alternate;
+    }
+
+
+    /* =========================
+       ====== Vinho escuro ======
+       (apenas no capítulo "A fundadora")
+       ========================= */
+    .about__bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 1.25s ease;
+      background:
+        radial-gradient(1200px 760px at 16% 16%, rgba(128, 0, 40, .34), transparent 62%),
+        radial-gradient(980px 680px at 84% 86%, rgba(196, 24, 70, .18), transparent 60%),
+        radial-gradient(560px 520px at 54% 46%, rgba(255, 212, 224, .07), transparent 70%),
+        linear-gradient(180deg, #040004, #14000c 45%, #030002);
+      background-size: 150% 150%;
+      filter: saturate(1.00) brightness(.94);
+      will-change: opacity, transform, filter;
+    }
+
+    .about.is-wine .about__bg::after {
+      opacity: 1;
+      animation: winePulse 86s ease-in-out infinite;
+    }
+
+    .about__overlay::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 1.25s ease;
+      background:
+        radial-gradient(980px 540px at 52% 42%, rgba(128, 0, 40, .18), transparent 62%),
+        radial-gradient(720px 520px at 24% 78%, rgba(196, 24, 70, .12), transparent 58%),
+        linear-gradient(180deg, rgba(24, 0, 14, .46), rgba(24, 0, 14, .34) 40%, rgba(24, 0, 14, .46));
+      background-size: 150% 150%;
+      will-change: opacity, transform;
+    }
+
+    .about.is-wine .about__overlay::after {
+      opacity: 1;
+      animation: wineOverlayPulse 96s ease-in-out infinite;
+    }
+
+    .about.is-wine .orb {
+      background: radial-gradient(circle at 30% 30%, rgba(128, 0, 40, .72), transparent 62%),
+        radial-gradient(circle at 70% 70%, rgba(196, 24, 70, .62), transparent 62%);
+      opacity: .18;
+    }
+
+
+
+    .about__photo {
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+      pointer-events: none;
+      opacity: 0;
+      background-image:
+        linear-gradient(90deg,
+          rgba(7, 7, 11, .96) 0%,
+          rgba(7, 7, 11, .82) 26%,
+          rgba(7, 7, 11, .55) 48%,
+          rgba(7, 7, 11, .18) 100%),
+        var(--aboutPhoto);
+      background-size: cover;
+      background-position: 62% center;
+      filter: saturate(1.03) contrast(1.03);
+      transform: translate3d(1.8%, 0, 0) scale(1.04);
+      transition:
+        opacity .65s ease,
+        transform .65s ease,
+        filter .65s ease;
+      will-change: opacity, transform, filter;
+      animation: none;
+    }
+
+    .about.hasPhoto .about__photo {
+      opacity: .85;
+      transform: translate3d(0, 0, 0) scale(1.02);
+      filter: saturate(1.06) contrast(1.06);
+      transition-duration: 2.8s;
+      transition-timing-function: cubic-bezier(.22, .61, .36, 1);
+      animation: photoDrift 36s ease-in-out infinite alternate;
+    }
+
+    @keyframes photoDrift {
+      from {
+        background-position: 58% 46%;
+      }
+
+      to {
+        background-position: 66% 54%;
+      }
+    }
+
+
+    .about__overlay {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        linear-gradient(180deg, rgba(32, 18, 52, .58), rgba(32, 18, 52, .45) 40%, rgba(32, 18, 52, .58)),
+        radial-gradient(900px 520px at 55% 45%, rgba(124, 58, 237, .22), transparent 60%),
+        radial-gradient(750px 520px at 20% 70%, rgba(168, 85, 247, .16), transparent 55%);
+    }
+
+    .about__glow {
+      position: absolute;
+      inset: -2px;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .85;
+      mix-blend-mode: screen;
+      background:
+        radial-gradient(620px 200px at 20% 20%, rgba(233, 213, 255, .32), transparent 70%),
+        radial-gradient(520px 220px at 72% 70%, rgba(168, 85, 247, .24), transparent 72%);
+      filter: blur(0.2px);
+    }
+
+    .about__glow::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .55;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='800' viewBox='0 0 1200 800'%3E%3Cg fill='none' stroke='rgba(233,213,255,0.22)' stroke-width='1'%3E%3Cpath d='M-40 190 C 240 80, 420 160, 620 120 S 980 60, 1260 140'/%3E%3Cpath d='M-60 520 C 220 420, 420 520, 640 460 S 980 360, 1260 470'/%3E%3Cpath d='M-60 680 C 220 620, 420 700, 660 640 S 980 560, 1260 640'/%3E%3C/g%3E%3C/svg%3E");
+      background-size: cover;
+      background-position: center;
+      filter: blur(.15px);
+      animation: traceDrift 26s ease-in-out infinite alternate;
+    }
+
+    .orb {
+      position: absolute;
+      width: min(520px, 46vw);
+      aspect-ratio: 1 / 1;
+      border-radius: 999px;
+      filter: blur(22px);
+      opacity: .22;
+      z-index: -2;
+      background: radial-gradient(circle at 30% 30%, rgba(124, 58, 237, .85), transparent 62%),
+        radial-gradient(circle at 70% 70%, rgba(168, 85, 247, .80), transparent 62%);
+      animation: orbFloat 28s ease-in-out infinite alternate;
+    }
+
+    .orb.o1 {
+      left: -12vw;
+      top: -12vh;
+      transform: rotate(8deg);
+    }
+
+    .orb.o2 {
+      right: -14vw;
+      bottom: -16vh;
+      transform: rotate(-10deg);
+      animation-duration: 34s;
+      opacity: .18;
+    }
+
+    .orb.o3 {
+      left: 48vw;
+      top: 52vh;
+      width: min(420px, 38vw);
+      opacity: .12;
+      animation-duration: 40s;
+    }
+
+    @keyframes bgDrift {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1.02);
+        filter: saturate(1.03) brightness(.98);
+      }
+
+      100% {
+        transform: translate3d(-1.2%, -0.8%, 0) scale(1.03);
+        filter: saturate(1.05) brightness(1.00);
+      }
+    }
+
+    @keyframes traceDrift {
+      0% {
+        transform: translate3d(0, 0, 0);
+        opacity: .52;
+      }
+
+      100% {
+        transform: translate3d(1.2%, -0.8%, 0);
+        opacity: .58;
+      }
+    }
+
+    @keyframes orbFloat {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+      }
+
+      100% {
+        transform: translate3d(2.2vw, -1.6vh, 0) scale(1.02) rotate(6deg);
+      }
+    }
+
+    @keyframes winePulse {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1.01);
+        filter: saturate(1.00) brightness(.92);
+        background-position: 50% 50%;
+      }
+
+      50% {
+        transform: translate3d(-0.6%, -0.4%, 0) scale(1.02);
+        filter: saturate(1.03) brightness(.95);
+        background-position: 46% 48%;
+      }
+
+      100% {
+        transform: translate3d(0.8%, 0.5%, 0) scale(1.03);
+        filter: saturate(1.05) brightness(.97);
+        background-position: 54% 52%;
+      }
+    }
+
+    @keyframes wineOverlayPulse {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1.00);
+        opacity: .86;
+        background-position: 50% 50%;
+      }
+
+      50% {
+        transform: translate3d(-0.4%, 0.2%, 0) scale(1.01);
+        opacity: 1;
+        background-position: 47% 52%;
+      }
+
+      100% {
+        transform: translate3d(0.6%, -0.3%, 0) scale(1.02);
+        opacity: .90;
+        background-position: 53% 49%;
+      }
+    }
+
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .about__bg,
+      .about__glow::before,
+      .orb {
+        animation: none !important;
+      }
+
+      .chip.is-active::before {
+        animation: none !important;
+      }
+    }
+
+    /* ========= CASCA / LAYOUT FIXO (sem scroll no desktop) ========= */
+    .shell {
+      position: relative;
+      width: min(var(--max), 100%);
+      height: min(760px, calc(100svh - 2 * clamp(14px, 2.6vw, 28px)));
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 6px;
+      /* Reduzido de 12px para 6px */
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .shell>* {
+      pointer-events: auto;
+    }
+
+    /* Ajuste Mobile Principal: Habilitar scroll e altura automática em TUDO */
+    /* Estilos móveis consolidados agora no fim do arquivo CSS para garantir precedência */
+
+    .topbar {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding-top: 93px;
+      /* espaço para o título central no topo */
+      z-index: 10;
+      overflow: visible;
+    }
+
+    .brand {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 4px;
+      text-decoration: none;
+      letter-spacing: .01em;
+      user-select: none;
+    }
+
+    .brand__name {
+      font-weight: 760;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .brand__dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, var(--violet3), var(--violet2));
+      box-shadow: 0 0 0 4px rgba(168, 85, 247, .12), 0 0 22px rgba(168, 85, 247, .38);
+    }
+
+    .brand__tag {
+      font-size: 12.5px;
+      color: rgba(244, 244, 248, .65);
+    }
+
+    .chapterNav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: nowrap;
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: visible !important;
+      padding-top: 30px;
+      margin-top: -30px;
+      position: relative;
+      z-index: 11;
+      /* Offset padding para não empurrar outros elementos */
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .chapterNav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .chip {
+      border: 0;
+      background: transparent;
+      color: rgba(244, 244, 248, .82);
+      border-radius: 0;
+      padding: 24px 0 8px;
+      /* Aumentado para 24px top para acomodar o farol e seu brilho de 22px no topo */
+      font-size: 13px;
+      font-weight: 650;
+      cursor: pointer;
+      transition: color .18s ease, text-shadow .18s ease, transform .08s ease, opacity .18s ease;
+      user-select: none;
+      white-space: nowrap;
+      position: relative;
+      letter-spacing: .01em;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .chipText {
+      position: relative;
+      display: inline-block;
+    }
+
+    .chip:hover {
+      color: rgba(244, 244, 248, .94);
+      text-shadow: 0 0 14px rgba(168, 85, 247, .18);
+    }
+
+    .chip:active {
+      transform: translateY(1px);
+    }
+
+    .chip:focus-visible {
+      outline: 2px solid rgba(168, 85, 247, .70);
+      outline-offset: 4px;
+      border-radius: 10px;
+    }
+
+    /* Separador visual entre itens (sem “capsula”) */
+    .chip:not(:last-child)::after {
+      content: "|";
+      display: inline-block;
+      margin: 0 14px;
+      color: rgba(244, 244, 248, .42);
+      pointer-events: none;
+      transform: translateY(-1px);
+    }
+
+    .chip:hover {
+      background: transparent;
+      filter: none;
+    }
+
+    .chip:active {
+      transform: translateY(1px);
+    }
+
+    .chip.is-active {
+      color: rgba(244, 244, 248, .98);
+      text-shadow: 0 0 18px rgba(233, 213, 255, .20);
+    }
+
+    /* Trigger do dropdown mobile */
+    .chipDropdownTrigger {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(168, 85, 247, 0.15);
+      color: rgba(244, 244, 248, 0.6);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      margin-right: 13px;
+      flex-shrink: 0;
+      padding: 0;
+    }
+
+    .chipDropdownTrigger:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      border-color: rgba(168, 85, 247, 0.4);
+    }
+
+    .chipDropdownTrigger svg {
+      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    @media (max-width: 860px) {
+      .chapterNav {
+        padding-top: 15px;
+        margin-top: 0;
+        gap: 0;
+        flex-wrap: nowrap;
+        overflow: visible;
+        justify-content: center;
+        width: 100%;
+        transition: all 0.4s ease;
+      }
+
+      .chip {
+        display: none;
+        padding: 12px 0;
+        width: 100%;
+        text-align: center;
+      }
+
+      .chip.is-active {
+        display: block;
+        width: auto;
+        padding: 10px 0;
+      }
+
+      .chip:not(:last-child)::after {
+        display: none !important;
+      }
+
+      .chipDropdownTrigger {
+        display: flex;
+        margin-top: 0;
+      }
+
+      /* Estado Aberto (Dropdown) */
+      .chapterNav.is-open {
+        background: rgba(12, 12, 20, 0.85);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        position: absolute;
+        top: 85px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(300px, 90vw);
+        padding: 16px;
+        border-radius: 20px;
+        border: 1px solid rgba(168, 85, 247, 0.2);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+        flex-direction: column;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      .chapterNav.is-open .chip {
+        display: block;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      }
+
+      .chapterNav.is-open .chip:last-of-type {
+        border-bottom: 0;
+      }
+
+      .chapterNav.is-open .chipDropdownTrigger {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        margin: 0;
+      }
+
+      .chapterNav.is-open .chipDropdownTrigger svg {
+        transform: rotate(180deg);
+      }
+
+      .chapterNav.is-open .chip.is-active .chipText::before {
+        display: none;
+        /* Esconde o farol dentro do dropdown para não poluir */
+      }
+    }
+
+    /* “Farol” pitaya acima do item ativo (agora relativo ao texto) */
+    .chip.is-active .chipText::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: -18px;
+      /* Posicionado no meio do padding superior de 24px */
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--pitaya);
+      transform: translateX(-50%);
+      box-shadow:
+        0 0 0 4px rgba(255, 79, 163, .16),
+        0 0 22px rgba(255, 79, 163, .42);
+      animation: beaconPulse 2.6s ease-in-out infinite;
+    }
+
+    .hintRow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: rgba(244, 244, 248, .70);
+      font-size: 12.5px;
+      letter-spacing: .01em;
+      visibility: hidden;
+    }
+
+    .progress {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(244, 244, 248, .60);
+    }
+
+    .progressBar {
+      width: 180px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid rgba(233, 213, 255, .14);
+      overflow: hidden;
+    }
+
+    .progressBar>i {
+      display: block;
+      height: 100%;
+      width: 10%;
+      background: linear-gradient(90deg, rgba(124, 58, 237, .95), rgba(168, 85, 247, .85));
+      border-radius: 999px;
+      box-shadow: 0 0 18px rgba(168, 85, 247, .35);
+      transition: width .42s ease;
+    }
+
+    .panel {
+      position: relative;
+      border-radius: var(--r);
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+      overflow: hidden;
+      margin-top: -5px;
+    }
+
+    .panelInner {
+      height: 100%;
+      /* Reduzido padding vertical (top/bottom) pela metade, mantendo horizontal */
+      padding: clamp(8px, 1.1vw, 11px) clamp(16px, 2.2vw, 22px);
+      display: grid;
+      grid-template-rows: 1fr;
+    }
+
+    .chapter {
+      display: none;
+      height: 100%;
+    }
+
+    .chapter.is-active {
+      display: block;
+    }
+
+    .chapterStage {
+      height: 100%;
+      display: grid;
+      gap: 16px;
+      align-content: start;
+    }
+
+    .chapterTitle {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    /* Ajuste pontual: alinhar o bloco de título do capítulo "Quem somos" ao topo */
+    article.chapter[data-tab="quem"] .chapterTitle {
+      align-items: flex-start;
+    }
+
+
+    /* Quem somos: centralizar horizontalmente o título e a descrição */
+    article.chapter[data-tab="quem"] .chapterTitle {
+      justify-content: center;
+      text-align: center;
+    }
+
+    article.chapter[data-tab="quem"] .chapterTitle .lede {
+      margin: 8px auto 0;
+    }
+
+
+    /* Fundadora: centralizar horizontalmente o título e a descrição */
+    article.chapter[data-tab="fundadora"] .chapterTitle {
+      justify-content: center;
+      text-align: center;
+    }
+
+    article.chapter[data-tab="fundadora"] .chapterTitle .lede {
+      margin: 8px auto 0;
+    }
+
+
+    /* Fundadora: alinhar o bloco de titulo/descrição ao centro da coluna da direita (sem mexer na foto) */
+    @media (min-width: 861px) {
+      article.chapter[data-tab="fundadora"] .chapterTitle {
+        justify-content: flex-start;
+      }
+
+      article.chapter[data-tab="fundadora"] .chapterTitle>div {
+        width: calc(100% - 360px - 18px);
+        margin-left: calc(360px + 18px);
+        text-align: center;
+      }
+
+      /* Fundadora: alinhar SOMENTE o título "Lisandra Lencina" à esquerda no mesmo eixo do bloco de "Formações" */
+      article.chapter[data-tab="fundadora"] .chapterTitle h2 {
+        position: relative;
+        left: calc(-1 * (360px + 18px));
+        width: calc(100% + (360px + 18px));
+        text-align: left;
+      }
+    }
+
+
+
+    /* Valores: centralizar horizontalmente o título e a descrição */
+    article.chapter[data-tab="valores"] .chapterTitle {
+      justify-content: center;
+      text-align: center;
+    }
+
+    article.chapter[data-tab="valores"] .chapterTitle .lede {
+      margin: 8px auto 0;
+    }
+
+    /* Valores: centralizar o bloco (título + cards) no meio da página */
+    @media (min-width: 861px) {
+      article.chapter[data-tab="valores"] .chapterStage {
+        width: min(700px, 100%);
+        margin: 0 auto;
+      }
+
+      article.chapter[data-tab="valores"] .valuesGrid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Problemas, impactos (problemas2): centralizar horizontalmente */
+    article.chapter[data-tab="problemas2"] .chapterTitle {
+      justify-content: center;
+      text-align: center;
+    }
+
+    /* max-width: 800px para o lede não ficar muito largo, igual ao Problemas1 */
+    article.chapter[data-tab="problemas2"] .chapterTitle .lede {
+      margin: 8px auto 0;
+      max-width: 800px;
+    }
+
+    /* Como ajudamos (servicos): centralizar horizontalmente */
+    article.chapter[data-tab="servicos"] .chapterTitle {
+      justify-content: center;
+      text-align: center;
+    }
+
+    article.chapter[data-tab="servicos"] .chapterTitle .lede {
+      margin: 8px auto 0;
+      max-width: 800px;
+    }
+
+    /* Parceiros: centralizar horizontalmente */
+    article.chapter[data-tab="parceiros"] .chapterTitle {
+      justify-content: center;
+      text-align: center;
+    }
+
+    article.chapter[data-tab="parceiros"] .chapterTitle .lede {
+      margin: 8px auto 0;
+      max-width: 800px;
+    }
+
+    /* Diferenciais: centralizar horizontalmente o título e a descrição */
+    article.chapter[data-tab="diferenciais"] .chapterTitle {
+      justify-content: center;
+      text-align: center;
+    }
+
+    article.chapter[data-tab="diferenciais"] .chapterTitle .lede {
+      margin: 8px auto 0;
+      max-width: 800px;
+    }
+
+    /* Redesenho do layout Diferenciais: 2x2 Grid */
+    article.chapter[data-tab="diferenciais"] .whyGrid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    article.chapter[data-tab="diferenciais"] .whyList {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      width: 100%;
+    }
+
+    article.chapter[data-tab="diferenciais"] .why {
+      height: 100%;
+    }
+
+    article.chapter[data-tab="diferenciais"] .toolsBox {
+      width: 100%;
+    }
+
+    /* Ajuste mobile: volta para 1 coluna */
+    @media (max-width: 860px) {
+      article.chapter[data-tab="diferenciais"] .whyList {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Diferenciais: CTA solto abaixo da caixa */
+    article.chapter[data-tab="diferenciais"] .ctaRow {
+      flex-direction: column;
+      text-align: center;
+      gap: 16px;
+      margin-top: 3px;
+    }
+
+    article.chapter[data-tab="diferenciais"] .ctaText {
+      max-width: 100%;
+    }
+
+    article.chapter[data-tab="diferenciais"] .btnRow {
+      justify-content: center;
+    }
+
+    /* Quem somos — reorganização dos 3 quadros (Missão / O que nos move / Para quem) */
+    article.chapter[data-tab="quem"] .whoCards {
+      display: grid;
+      grid-template-columns: repeat(3, 300px);
+      grid-template-rows: auto;
+      grid-template-areas: "mission move audience";
+      gap: 18px;
+      align-items: stretch;
+      justify-content: center;
+    }
+
+    article.chapter[data-tab="quem"] .missionCard {
+      grid-area: mission;
+      width: 300px;
+      margin-top: 0;
+      justify-self: stretch;
+    }
+
+    article.chapter[data-tab="quem"] .moveCard {
+      grid-area: move;
+      width: 300px;
+      justify-self: stretch;
+    }
+
+    article.chapter[data-tab="quem"] .audienceCard {
+      grid-area: audience;
+      width: 300px;
+      justify-self: stretch;
+    }
+
+    @media (max-width: 860px) {
+      article.chapter[data-tab="quem"] .whoCards {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "mission"
+          "move"
+          "audience";
+      }
+
+      article.chapter[data-tab="quem"] .audienceCard {
+        justify-self: stretch;
+        width: 100%;
+      }
+    }
+
+    /* Centralização dos 3 quadros (apenas no desktop) */
+    @media (min-width: 861px) {
+      article.chapter[data-tab="quem"] .chapterStage {
+        height: 100%;
+        gap: 18px;
+        grid-template-rows: auto 1fr;
+        align-content: stretch;
+      }
+
+      article.chapter[data-tab="quem"] .whoCards {
+        justify-self: center;
+        align-self: start;
+      }
+
+      article.chapter[data-tab="quem"] .missionCard {
+        justify-self: end;
+      }
+
+      article.chapter[data-tab="quem"] .moveCard {
+        justify-self: start;
+      }
+    }
+
+    /* Harmonização visual dos 3 quadros (apenas na subsessão Quem somos) */
+    article.chapter[data-tab="quem"] .whoCards .card {
+      border-radius: 20px;
+      padding: 16px 16px 18px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, .07), rgba(255, 255, 255, .03)),
+        rgba(0, 0, 0, .18);
+      border: 1px solid rgba(233, 213, 255, .20);
+      box-shadow: 0 18px 38px rgba(0, 0, 0, .28);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    article.chapter[data-tab="quem"] .whoCards .card::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      pointer-events: none;
+      background:
+        radial-gradient(520px 180px at 18% 18%, rgba(233, 213, 255, .14), transparent 62%),
+        radial-gradient(560px 220px at 86% 78%, rgba(168, 85, 247, .10), transparent 66%);
+      opacity: .95;
+    }
+
+    article.chapter[data-tab="quem"] .whoCards .card>* {
+      position: relative;
+      z-index: 1;
+    }
+
+    article.chapter[data-tab="quem"] .whoCards .card h3 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    article.chapter[data-tab="quem"] .whoCards .card h3::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(168, 85, 247, .95);
+      box-shadow: 0 0 0 4px rgba(168, 85, 247, .14), 0 0 18px rgba(168, 85, 247, .22);
+      flex: 0 0 8px;
+    }
+
+    article.chapter[data-tab="quem"] .whoCards .card p {
+      color: rgba(244, 244, 248, .80);
+    }
+
+    article.chapter[data-tab="quem"] .whoCards .card p+.bullets {
+      margin-top: 10px;
+    }
+
+    article.chapter[data-tab="quem"] .whoCards .bullets {
+      list-style: none;
+      padding-left: 0;
+      margin: 8px 0 0;
+      display: grid;
+      gap: 7px;
+    }
+
+    article.chapter[data-tab="quem"] .whoCards .bullets li {
+      margin: 0;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    article.chapter[data-tab="quem"] .whoCards .bullets li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: .62em;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(233, 213, 255, .62);
+      box-shadow: 0 0 14px rgba(168, 85, 247, .14);
+      transform: translateY(-50%);
+    }
+
+    .chapterTitle h1,
+    .chapterTitle h2 {
+      margin: 0;
+      font-weight: 760;
+      letter-spacing: -0.02em;
+    }
+
+    .chapterTitle h1 {
+      font-size: clamp(22px, 2.2vw, 30px);
+    }
+
+    .chapterTitle h2 {
+      font-size: clamp(20px, 2.0vw, 28px);
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 650;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(244, 244, 248, .65);
+    }
+
+    .kicker i {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: rgba(168, 85, 247, .9);
+      box-shadow: 0 0 14px rgba(168, 85, 247, .36);
+      display: inline-block;
+    }
+
+    .lede {
+      margin: 8px 0 0;
+      color: rgba(244, 244, 248, .82);
+      line-height: 1.55;
+      font-size: 14.8px;
+      max-width: 72ch;
+    }
+
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .card {
+      border-radius: 18px;
+      border: 1px solid rgba(233, 213, 255, .16);
+      background: rgba(255, 255, 255, .05);
+      padding: 14px 14px;
+    }
+
+    .card h3 {
+      margin: 0 0 6px;
+      font-size: 14px;
+      font-weight: 760;
+      letter-spacing: -0.01em;
+    }
+
+    .card p {
+      margin: 0;
+      color: rgba(244, 244, 248, .78);
+      font-size: 13.8px;
+      line-height: 1.55;
+    }
+
+    .hi {
+      color: rgba(244, 244, 248, .94);
+      font-weight: 700;
+    }
+
+    .glowText {
+      background: linear-gradient(90deg, var(--violet3), rgba(244, 244, 248, .96));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .bullets {
+      margin: 10px 0 0;
+      padding-left: 16px;
+      color: rgba(244, 244, 248, .76);
+      font-size: 13.6px;
+      line-height: 1.55;
+    }
+
+    .bullets li {
+      margin: 6px 0;
+    }
+
+    /* ======= FUNDADORA ======= */
+    .founderGrid {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    /* Fundadora: centralização vertical do conjunto (título + foto + formações + timeline) */
+    article.chapter[data-tab="fundadora"] .chapterStage {
+      align-content: center;
+    }
+
+    article.chapter[data-tab="fundadora"] .founderGrid {
+      align-items: center;
+    }
+
+    .profile {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    /* Centralizar foto + formações (apenas na subsessão Fundadora) */
+    article.chapter[data-tab="fundadora"] .profile {
+      justify-items: center;
+    }
+
+    @media (min-width: 861px) {
+      article.chapter[data-tab="fundadora"] .profile {
+        transform: translateY(0);
+      }
+    }
+
+    article.chapter[data-tab="fundadora"] .formations {
+      text-align: center;
+    }
+
+
+    .avatar {
+      width: 240px;
+      height: 240px;
+      border-radius: 999px;
+      border: 1px solid rgba(233, 213, 255, .22);
+      background:
+        radial-gradient(420px 280px at 30% 30%, rgba(124, 58, 237, .35), transparent 60%),
+        radial-gradient(420px 280px at 70% 70%, rgba(168, 85, 247, .22), transparent 62%),
+        rgba(255, 255, 255, .04);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, .35);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: contrast(1.03) saturate(1.02);
+    }
+
+    .avatarFallback {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      letter-spacing: .02em;
+      color: rgba(244, 244, 248, .92);
+      font-size: 34px;
+    }
+
+    .formations {
+      color: rgba(244, 244, 248, .68);
+      font-size: 12.8px;
+      line-height: 1.55;
+    }
+
+    .formations b {
+      color: rgba(244, 244, 248, .92);
+    }
+
+    .timeline {
+      border-radius: 18px;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+      padding: 16px 16px 18px;
+      position: relative;
+      overflow: visible;
+      /* evita cortar dots e glow */
+    }
+
+    .timelineHead {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 22px;
+      /* +10px espaço solicitado */
+    }
+
+    .timelineHead h3 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .timelineHead span {
+      font-size: 12.5px;
+      color: rgba(244, 244, 248, .62);
+      white-space: nowrap;
+    }
+
+    /* Linha e pontos centrados no mesmo eixo */
+    .tline {
+      --railTop: 50%;
+      position: relative;
+      margin-top: 8px;
+      height: 168px;
+      /* garante espaço p/ alternar texto */
+      padding: 0 22px;
+      /* respiro lateral */
+    }
+
+    .tline::before {
+      content: "";
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      top: var(--railTop);
+      height: 2px;
+      background: linear-gradient(90deg,
+          rgba(244, 244, 248, .12),
+          rgba(244, 244, 248, .22),
+          rgba(244, 244, 248, .12));
+      border-radius: 999px;
+      box-shadow: 0 0 18px rgba(168, 85, 247, .10);
+      z-index: 0;
+      transform: translateY(-1px);
+    }
+
+    .titems {
+      position: relative;
+      z-index: 1;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .titem {
+      position: relative;
+      text-align: center;
+      height: 100%;
+      color: rgba(244, 244, 248, .74);
+      font-size: 12.8px;
+      line-height: 1.35;
+      text-wrap: balance;
+    }
+
+    /* Texto alternado (cima/baixo) sem mexer no eixo */
+    .tlabel {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 190px;
+    }
+
+    .tlabel b {
+      display: block;
+      font-size: 13.4px;
+      color: rgba(244, 244, 248, .92);
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .tlabel small {
+      display: block;
+      color: rgba(244, 244, 248, .62);
+      font-size: 12.2px;
+      line-height: 1.35;
+    }
+
+    .tlabel .tyear {
+      margin: 0 0 2px;
+    }
+
+    .tlabel .tdesc {
+      margin: 2px 0 0;
+      white-space: nowrap;
+    }
+
+    .titem:nth-child(odd) .tlabel {
+      bottom: calc(50% + 18px);
+    }
+
+    .titem:nth-child(even) .tlabel {
+      top: calc(50% + 18px);
+    }
+
+    .dot {
+      position: absolute;
+      top: calc(var(--railTop) - 7px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, .38);
+      border: 1px solid rgba(244, 244, 248, .46);
+      box-shadow:
+        0 0 0 7px rgba(0, 0, 0, .14),
+        0 0 18px rgba(168, 85, 247, .12);
+    }
+
+    .titem.is-highlight .dot {
+      background: rgba(168, 85, 247, .90);
+      border-color: rgba(233, 213, 255, .70);
+      box-shadow:
+        0 0 0 7px rgba(168, 85, 247, .16),
+        0 0 26px rgba(168, 85, 247, .36);
+    }
+
+
+    .sectionSubtitle {
+      color: rgba(244, 244, 248, .96);
+      font-size: 16px;
+      font-weight: 700;
+      text-align: center;
+      margin: 20px 0 8px;
+      padding-left: 0;
+      letter-spacing: -0.01em;
+    }
+
+    /* ======= VALORES ======= */
+    .valuesGrid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    @media (max-width: 860px) {
+      .valuesGrid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .valueList {
+      display: grid;
+      gap: 10px;
+    }
+
+    .value {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 12px;
+      min-height: 50px;
+      border-radius: 16px;
+      border: 1px solid rgba(233, 213, 255, .16);
+      background: rgba(255, 255, 255, .04);
+      position: relative;
+      overflow: hidden;
+      transition: border-color .3s ease;
+    }
+
+    /* Efeito de Glitter Pitaya */
+    .value::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 0;
+      background-image:
+        radial-gradient(1.5px 1.5px at 10% 90%, var(--pitaya) 0%, transparent 100%),
+        radial-gradient(1px 1px at 20% 80%, var(--pitaya) 0%, transparent 100%),
+        radial-gradient(2px 2px at 35% 95%, var(--pitaya) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 50% 85%, var(--pitaya) 0%, transparent 100%),
+        radial-gradient(2px 2px at 65% 92%, var(--pitaya) 0%, transparent 100%),
+        radial-gradient(1px 1px at 80% 88%, var(--pitaya) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 92% 96%, var(--pitaya) 0%, transparent 100%);
+      background-size: 100% 60px;
+      background-repeat: repeat-y;
+      transition: opacity .4s ease;
+    }
+
+    .value:hover {
+      border-color: rgba(255, 79, 163, .4);
+      /* pitaya suave */
+    }
+
+    .value:hover::before {
+      opacity: 0.35;
+      animation: glitterRise 1.2s linear infinite;
+    }
+
+    @keyframes glitterRise {
+      from {
+        background-position: 0 60px;
+      }
+
+      to {
+        background-position: 0 0;
+      }
+    }
+
+    .value svg {
+      width: 20px;
+      height: 20px;
+      flex: 0 0 20px;
+      color: rgba(233, 213, 255, .78);
+      margin-top: 0;
+      position: relative;
+      z-index: 1;
+      transition: color .3s ease, transform .3s cubic-bezier(.34, 1.56, .64, 1);
+    }
+
+    .value:hover svg {
+      color: var(--pitaya);
+      transform: scale(1.15) rotate(-5deg);
+      filter: drop-shadow(0 0 8px rgba(255, 79, 163, .4));
+    }
+
+    .value b {
+      display: block;
+      font-size: 13.8px;
+      letter-spacing: -0.01em;
+      margin-bottom: 2px;
+      position: relative;
+      z-index: 1;
+      transition: color .3s ease;
+    }
+
+    .value:hover b {
+      color: #fff;
+    }
+
+    .value span {
+      display: block;
+      color: rgba(244, 244, 248, .72);
+      font-size: 13.2px;
+      line-height: 1.5;
+      white-space: nowrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ======= PROBLEMAS ======= */
+    /* ======= PROBLEMAS / CENÁRIO ======= */
+    .scenarioGrid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .leftColumn {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .rightColumn {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .scenarioCard {
+      position: relative;
+      overflow: hidden;
+      min-height: 220px;
+      border-radius: 16px;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      border: none;
+      background: transparent;
+      /* fallback */
+    }
+
+    .scenarioCard img {
+      position: absolute;
+      /* Reduzindo tamanho em 30% para aprox 70%. 
+         15% top/bottom/left/right resultam em 70% width/height.
+      */
+      top: 15%;
+      left: 15%;
+      width: 70%;
+      height: 70%;
+      object-fit: cover;
+      z-index: 0;
+      transition: transform 0.5s ease;
+      opacity: 0.8;
+      border-radius: 4px;
+    }
+
+    .sourceLink {
+      position: absolute;
+      /* Posiciona abaixo da imagem (que termina em 85%) */
+      top: 87%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.5);
+      text-decoration: none;
+      white-space: nowrap;
+      pointer-events: auto;
+      transition: color 0.2s ease;
+    }
+
+    .sourceLink:hover {
+      color: rgba(255, 255, 255, 0.9);
+      text-decoration: underline;
+    }
+
+    .scenarioCard:hover img {
+      transform: scale(1.05);
+    }
+
+    .scenarioOverlay {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      width: 400px;
+      max-width: 90%;
+      /* Prevent overflow on small screens */
+      height: 50px;
+      padding: 0 16px;
+      background: rgba(16, 16, 26, 0.6);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* Center text inside the strip */
+      border-radius: 8px;
+      /* Optional: smooth corners like image */
+    }
+
+    /* Ajuste específico cor de Business vs Workers se desejar, mas o print era verde/vermelho só pra highlight */
+
+    .scenarioCard .stat {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .scenarioCard .stat strong {
+      font-size: 32px;
+      /* Aumentei um pouco pois está sozinho agora */
+      color: #fff;
+      line-height: 1;
+    }
+
+    .scenarioCard p {
+      font-size: 13.5px;
+      line-height: 1.45;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    /* Card DHO 360 Reformulado */
+    .card.dhoCard {
+      padding: 0 !important;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(233, 213, 255, .1);
+      overflow: hidden;
+      /* Garante que o header não vase o border-radius */
+    }
+
+    .dhoHeader {
+      background: rgba(16, 16, 26, 0.60);
+      /* Background igual ao overlay dos cards laterais */
+      height: 50px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .dhoHeader h3 {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #fff;
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    .dhoGrid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 24px;
+      /* Aumentado de 10px para 24px para caber a seta */
+      padding: 12px;
+      flex: 1;
+    }
+
+    @media (max-width: 860px) {
+      .dhoGrid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+      }
+
+      /* Ajuste das setas no mobile para apontar para baixo corretamente entre todos */
+      .dhoItem:nth-child(1)::after,
+      .dhoItem:nth-child(2)::after {
+        display: none;
+        /* Remove as setas laterais do desktop */
+      }
+
+      .dhoItem:not(:last-child)::after {
+        content: "↓";
+        position: absolute;
+        bottom: -26px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 20px;
+        font-weight: bold;
+        color: #e9d5ff;
+        text-shadow: 0 0 5px #a855f7, 0 0 12px #7c3aed;
+        z-index: 10;
+        pointer-events: none;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .dhoGrid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+      }
+
+      /* Ajuste das setas no mobile para apontar para baixo corretamente entre todos */
+      .dhoItem:nth-child(1)::after,
+      .dhoItem:nth-child(2)::after {
+        display: none;
+        /* Remove as setas laterais do desktop */
+      }
+
+      .dhoItem:not(:last-child)::after {
+        content: "↓";
+        position: absolute;
+        bottom: -26px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 20px;
+        font-weight: bold;
+        color: #e9d5ff;
+        text-shadow: 0 0 5px #a855f7, 0 0 12px #7c3aed;
+        z-index: 10;
+        pointer-events: none;
+      }
+    }
+
+    /* Setas de continuação entre linhas do grid */
+    .dhoItem:nth-child(1),
+    .dhoItem:nth-child(2) {
+      position: relative;
+      /* Para posicionar a seta absoluta */
+      overflow: visible;
+      /* Permitir que a seta saia do card */
+    }
+
+    .dhoItem:nth-child(1)::after,
+    .dhoItem:nth-child(2)::after {
+      content: "↓";
+      position: absolute;
+      bottom: -26px;
+      /* Posiciona no gap */
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 20px;
+      font-weight: bold;
+      color: #e9d5ff;
+      /* Lilás claro */
+      text-shadow: 0 0 5px #a855f7, 0 0 12px #7c3aed;
+      /* Glow violeta */
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .dhoItem {
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 8px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      /* Alinhamento topo */
+      text-align: center;
+      gap: 8px;
+    }
+
+    /* Ajuste fino solicitado na coluna esquerda: subir o segundo card em 5% */
+    .leftColumn .scenarioCard:nth-child(2) {
+      transform: translateY(-5%);
+    }
+
+    /* Cards da esquerda (1 e 3) com fundo rosa pitaya transparente */
+    .dhoItem:nth-child(odd) {
+      background: rgba(255, 79, 163, 0.15);
+    }
+
+    /* Gráfico Pirâmide */
+    .pyramidChart {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      width: 100%;
+      margin-bottom: 4px;
+    }
+
+    .pLevel {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-size: 9px;
+      padding: 4px;
+      border-radius: 2px;
+      white-space: nowrap;
+      width: 100%;
+      text-align: center;
+      line-height: 1.1;
+    }
+
+    .pLevel.p1 {
+      width: 60%;
+    }
+
+    .pLevel.p2 {
+      width: 80%;
+    }
+
+    .pLevel.p3 {
+      width: 100%;
+    }
+
+    .dhoCaption {
+      font-size: 11px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 4px;
+      /* Espaço abaixo do título */
+      line-height: 1.2;
+    }
+
+    /* Gráfico Pizza */
+    .pieChart {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: conic-gradient(var(--pitaya) 0% 30%, rgba(255, 255, 255, 0.1) 30% 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 4px;
+    }
+
+    .pieChart span {
+      font-weight: 700;
+      font-size: 13px;
+      color: #fff;
+    }
+
+    .dhoText {
+      font-size: 11px;
+      line-height: 1.35;
+      color: rgba(244, 244, 248, 0.9);
+    }
+
+    .bigStat {
+      font-size: 24px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .dhoItem .hi {
+      color: var(--pitaya);
+      font-weight: 700;
+    }
+
+    .dhoSource {
+      display: block;
+      text-align: center;
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.5);
+      text-decoration: none;
+      padding-bottom: 8px;
+      /* Espaço inferior */
+      margin-top: -4px;
+      /* Ajuste fino se necessário para aproximar do grid */
+      transition: color 0.2s ease;
+    }
+
+    .dhoSource:hover {
+      color: rgba(255, 255, 255, 0.9);
+      text-decoration: underline;
+    }
+
+    .dhoItem strong {
+      font-size: 26px;
+      color: var(--p1);
+      display: block;
+    }
+
+    .dhoItem p {
+      font-size: 13px;
+      line-height: 1.4;
+      color: rgba(244, 244, 248, .75);
+      margin: 0;
+    }
+
+    /* Responsividade */
+    @media (max-width: 800px) {
+      .scenarioGrid {
+        grid-template-columns: 1fr;
+      }
+
+      .scenarioCard {
+        min-height: 200px;
+      }
+
+      .dhoCard {
+        height: auto;
+      }
+    }
+
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .stat {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .stat strong {
+      font-size: 34px;
+      letter-spacing: -0.03em;
+    }
+
+    .stat em {
+      font-style: normal;
+      color: rgba(244, 244, 248, .68);
+      font-size: 12.8px;
+    }
+
+    .miniStats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .mini {
+      border-radius: 16px;
+      border: 1px solid rgba(233, 213, 255, .14);
+      background: rgba(255, 255, 255, .04);
+      padding: 10px 10px;
+    }
+
+    .mini b {
+      display: block;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+    }
+
+    .mini span {
+      display: block;
+      margin-top: 2px;
+      font-size: 12.6px;
+      color: rgba(244, 244, 248, .70);
+      line-height: 1.35;
+    }
+
+    /* ======= IMPACTOS ======= */
+    .impactGrid {
+      display: grid;
+      grid-template-columns: 410px 410px;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    @media (max-width: 860px) {
+      .impactGrid {
+        grid-template-columns: 1fr;
+        width: 100%;
+      }
+    }
+
+    .impactCol h3 {
+      margin: 0 0 10px;
+      font-size: 13.5px;
+      letter-spacing: .02em;
+      color: rgba(244, 244, 248, .70);
+      text-transform: uppercase;
+    }
+
+    .impactList {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .impactItem {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 9px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(233, 213, 255, .14);
+      background: rgba(255, 255, 255, .04);
+    }
+
+    .impactNum {
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      color: rgba(244, 244, 248, .92);
+      background:
+        linear-gradient(180deg, rgba(124, 58, 237, .24), rgba(124, 58, 237, .10)),
+        rgba(255, 255, 255, .04);
+      border: 1px solid rgba(233, 213, 255, .18);
+    }
+
+    .impactItem b {
+      display: block;
+      font-size: 13.8px;
+      letter-spacing: -0.01em;
+      margin-bottom: 2px;
+    }
+
+    .impactItem span {
+      display: block;
+      color: rgba(244, 244, 248, .70);
+      font-size: 13.0px;
+      line-height: 1.45;
+    }
+
+    /* ======= SERVICOS ======= */
+    .serviceGrid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    @media (max-width: 860px) {
+      .serviceGrid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .serviceCard {
+      border-radius: 18px;
+      border: 1px solid rgba(233, 213, 255, .14);
+      background: rgba(255, 255, 255, .04);
+      padding: 14px 14px;
+    }
+
+    .serviceCard h3 {
+      margin: 0 0 8px;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    .serviceCard ul {
+      margin: 0;
+      padding-left: 16px;
+      color: rgba(244, 244, 248, .76);
+      font-size: 13.2px;
+      line-height: 1.55;
+    }
+
+    .journey {
+      margin-top: 10px;
+      border-radius: 18px;
+      border: 1px solid rgba(233, 213, 255, .14);
+      background: rgba(0, 0, 0, .28);
+      padding: 14px 14px;
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .journeyLabel {
+      color: rgba(244, 244, 248, .70);
+      font-size: 12.5px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      justify-self: start;
+      opacity: .9;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    @media (max-width: 860px) {
+      .steps {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .step {
+      border-radius: 16px;
+      border: 1px solid rgba(233, 213, 255, .12);
+      background: rgba(255, 255, 255, .04);
+      padding: 12px 12px;
+    }
+
+    .step b {
+      display: block;
+      font-size: 12.8px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: rgba(244, 244, 248, .62);
+    }
+
+    .step strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 14px;
+      letter-spacing: -0.01em;
+    }
+
+    .step span {
+      display: block;
+      margin-top: 4px;
+      color: rgba(244, 244, 248, .70);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .formats {
+      margin-top: 10px;
+      color: rgba(244, 244, 248, .70);
+      font-size: 12.8px;
+      line-height: 1.45;
+    }
+
+    /* ======= DIFERENCIAIS ======= */
+    .whyGrid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .whyList {
+      display: grid;
+      gap: 10px;
+    }
+
+    .why {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(233, 213, 255, .14);
+      background: rgba(255, 255, 255, .04);
+    }
+
+    .whyIcon {
+      width: 28px;
+      height: 28px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 79, 163, .3);
+      background:
+        linear-gradient(180deg, rgba(255, 79, 163, .25), rgba(255, 79, 163, .10)),
+        rgba(255, 255, 255, .04);
+      display: grid;
+      place-items: center;
+      color: rgba(255, 79, 163, .9);
+      flex: 0 0 28px;
+      box-shadow: 0 0 12px rgba(255, 79, 163, 0.15);
+    }
+
+    .why b {
+      display: block;
+      font-size: 13.8px;
+      letter-spacing: -0.01em;
+      margin-bottom: 2px;
+    }
+
+    .why span {
+      display: block;
+      color: rgba(244, 244, 248, .70);
+      font-size: 13.0px;
+      line-height: 1.45;
+    }
+
+    .toolsBox {
+      border-radius: 18px;
+      border: 1px solid rgba(233, 213, 255, .16);
+      background:
+        linear-gradient(180deg, rgba(124, 58, 237, .14), rgba(124, 58, 237, .06)),
+        rgba(255, 255, 255, .04);
+      padding: 14px 14px;
+    }
+
+    .toolsBox h3 {
+      margin: 0 0 6px;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    .toolsBox p {
+      margin: 0;
+      color: rgba(244, 244, 248, .74);
+      font-size: 13.2px;
+      line-height: 1.55;
+    }
+
+    .ctaRow {
+      margin-top: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .ctaText {
+      color: rgba(244, 244, 248, .84);
+      font-weight: 750;
+      letter-spacing: -0.01em;
+      font-size: 14.2px;
+      max-width: 52ch;
+    }
+
+    .btnRow {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border-radius: 14px;
+      padding: 11px 14px;
+      border: 1px solid rgba(233, 213, 255, .22);
+      background: rgba(255, 255, 255, .06);
+      color: rgba(244, 244, 248, .92);
+      text-decoration: none;
+      font-weight: 750;
+      font-size: 13.8px;
+      letter-spacing: .01em;
+      cursor: pointer;
+      transition: background .18s ease, border-color .18s ease, transform .08s ease, filter .18s ease;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, .09);
+      border-color: rgba(233, 213, 255, .36);
+      filter: brightness(1.02);
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn.primary {
+      background:
+        linear-gradient(180deg, rgba(255, 140, 66, .45), rgba(255, 140, 66, .20)),
+        rgba(255, 255, 255, .06);
+      border-color: rgba(255, 140, 66, .5);
+      box-shadow: 0 12px 26px rgba(0, 0, 0, .26), 0 0 20px rgba(255, 140, 66, 0.15);
+      color: #fff;
+      animation: btnPulse 3s infinite ease-in-out;
+    }
+
+    @keyframes btnPulse {
+
+      0%,
+      100% {
+        box-shadow: 0 12px 26px rgba(0, 0, 0, .26), 0 0 15px rgba(255, 140, 66, 0.1);
+        transform: scale(1);
+      }
+
+      50% {
+        box-shadow: 0 12px 30px rgba(0, 0, 0, .3), 0 0 35px rgba(255, 140, 66, 0.3);
+        transform: scale(1.02);
+      }
+    }
+
+    /* ========= TRANSICAO ENTRE CAPITULOS ========= */
+    .chapterAnim {
+      animation: fadeIn .30s ease both;
+    }
+
+    .chapterAnimOut {
+      animation: fadeOut .22s ease both;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+        filter: blur(.2px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+      }
+    }
+
+    @keyframes beaconPulse {
+
+      0%,
+      100% {
+        opacity: .35;
+        transform: translateX(-50%) scale(.90);
+      }
+
+      50% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+      }
+    }
+
+
+    @keyframes fadeOut {
+      from {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      to {
+        opacity: 0;
+        transform: translateY(-4px);
+      }
+    }
+
+    /* ========= CTAs e redes (reaproveitados do index) ========= */
+
+
+    .socialLinks {
+      position: absolute;
+      bottom: calc(76px + env(safe-area-inset-bottom));
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 6;
+      pointer-events: auto;
+    }
+
+    .socialLinks a {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, .68);
+      background: rgba(244, 244, 248, .92);
+      display: grid;
+      place-items: center;
+      color: rgba(22, 20, 34, .88);
+      text-decoration: none;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, .30);
+      transition: background .18s ease, border-color .18s ease, transform .08s ease, filter .18s ease;
+    }
+
+    .socialLinks a:hover {
+      background: rgba(244, 244, 248, .98);
+      border-color: rgba(255, 255, 255, .90);
+      filter: brightness(1.02);
+    }
+
+    .socialLinks a:active {
+      transform: translateY(1px);
+    }
+
+    .socialLinks svg {
+      width: 18px;
+      height: 18px;
+      display: block;
+    }
+
+    @media (max-width: 980px) {
+      .cornerCtas a {
+        width: 190px;
+      }
+
+      .shell {
+        height: min(820px, calc(100svh - 2 * clamp(14px, 2.6vw, 28px)));
+      }
+    }
+
+    /* ========= LINKS LEGAIS + RODAPE (igual ao index) ========= */
+    .legalLinks {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: calc(38px + env(safe-area-inset-bottom));
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 0 14px;
+      font-size: 12.5px;
+      line-height: 1.35;
+      color: rgba(244, 244, 248, .52);
+      letter-spacing: .01em;
+      z-index: 5;
+      pointer-events: auto;
+    }
+
+    .legalLinks a {
+      color: rgba(244, 244, 248, .52);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(244, 244, 248, .14);
+      padding-bottom: 1px;
+      transition: color .18s ease, border-color .18s ease, filter .18s ease;
+    }
+
+    .legalLinks a:hover {
+      color: rgba(244, 244, 248, .74);
+      border-color: rgba(233, 213, 255, .34);
+      filter: brightness(1.02);
+    }
+
+    .legalLinks__sep {
+      opacity: .55;
+      user-select: none;
+    }
+
+    .siteFooter {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: calc(12px + env(safe-area-inset-bottom));
+      text-align: center;
+      font-size: 12.5px;
+      line-height: 1.35;
+      color: rgba(244, 244, 248, .55);
+      letter-spacing: .01em;
+      padding: 0 14px;
+      pointer-events: none;
+      text-wrap: balance;
+    }
+
+    /* ========= MODAL (igual ao index) ========= */
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 50;
+    }
+
+    .modal[aria-hidden="false"] {
+      display: flex;
+    }
+
+    .modal__backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, .62);
+    }
+
+    .modal__panel {
+      position: relative;
+      width: min(560px, 100%);
+      border-radius: var(--r);
+      border: 1px solid rgba(233, 213, 255, .20);
+      background:
+        linear-gradient(180deg, rgba(16, 16, 26, .86), rgba(10, 10, 18, .86)),
+        radial-gradient(650px 280px at 20% 20%, rgba(124, 58, 237, .22), transparent 70%),
+        radial-gradient(520px 280px at 80% 90%, rgba(168, 85, 247, .18), transparent 72%);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      max-height: calc(100dvh - 36px - env(safe-area-inset-bottom));
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .modal__top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .modal__title {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 650;
+      letter-spacing: -0.01em;
+    }
+
+    .modal__desc {
+      margin: 0 0 16px;
+      color: rgba(244, 244, 248, .78);
+      line-height: 1.55;
+      font-size: 14.5px;
+    }
+
+    .iconBtn {
+      border: 1px solid rgba(233, 213, 255, .22);
+      background: rgba(255, 255, 255, .06);
+      color: var(--fg);
+      border-radius: 12px;
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: background .18s ease, border-color .18s ease;
+    }
+
+    .iconBtn:hover {
+      background: rgba(255, 255, 255, .09);
+      border-color: rgba(233, 213, 255, .36);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .pick {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-radius: 16px;
+      padding: 14px 14px;
+      border: 1px solid rgba(233, 213, 255, .18);
+      background: rgba(255, 255, 255, .05);
+      text-decoration: none;
+      transition: background .18s ease, border-color .18s ease, transform .08s ease;
+    }
+
+    .pick:hover {
+      background: rgba(255, 255, 255, .08);
+      border-color: rgba(233, 213, 255, .36);
+    }
+
+    .pick:active {
+      transform: translateY(1px);
+    }
+
+    .pick strong {
+      display: block;
+      font-size: 14.5px;
+      letter-spacing: -0.01em;
+    }
+
+    .pick span {
+      display: block;
+      margin-top: 2px;
+      color: rgba(244, 244, 248, .72);
+      font-size: 13.2px;
+      line-height: 1.4;
+    }
+
+    .arrow {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(233, 213, 255, .16);
+      background: rgba(0, 0, 0, .24);
+      color: rgba(244, 244, 248, .82);
+      flex: 0 0 34px;
+    }
+
+    /* ========= RESPONSIVO (mobile: scroll interno se precisar) ========= */
+    @media (max-width: 920px) {
+      .shell {
+        width: 100%;
+        height: auto;
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .chapterNav {
+        max-width: 100%;
+        justify-content: center;
+        overflow-x: visible;
+        flex-wrap: wrap;
+        row-gap: 6px;
+        padding-bottom: 0;
+      }
+
+      .chapterNav::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .cornerCtas a {
+        width: auto;
+        min-width: 160px;
+      }
+
+      /* Estilos móveis consolidados agora no fim do arquivo CSS */
+      html,
+      body {
+        height: auto !important;
+        overflow-y: auto !important;
+      }
+
+      .about {
+        height: auto !important;
+        min-height: 100svh !important;
+        overflow-y: auto !important;
+        padding-bottom: 60px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+      }
+
+      .shell {
+        height: auto !important;
+        min-height: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        pointer-events: none !important;
+        /* mantém pass-through para o fundo se necessário */
+      }
+
+      .shell>* {
+        pointer-events: auto !important;
+      }
+
+      .panel {
+        overflow: visible !important;
+        height: auto !important;
+        min-height: 0 !important;
+      }
+
+      .panelInner {
+        height: auto !important;
+        min-height: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 24px !important;
+      }
+
+      .chapter {
+        height: auto !important;
+        overflow: visible !important;
+      }
+
+      .chapterStage {
+        height: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 24px !important;
+      }
+
+      body {
+        overflow-y: auto;
+      }
+
+      .grid2 {
+        grid-template-columns: 1fr;
+      }
+
+      .founderGrid {
+        grid-template-columns: 1fr;
+      }
+
+      /* Fundadora (mobile): centralização vertical do conjunto (título + foto + formações) */
+      article.chapter[data-tab="fundadora"] .chapterStage {
+        align-content: center;
+      }
+
+      .avatar {
+        width: 210px;
+        height: 210px;
+      }
+
+      .timeline .titems {
+        grid-template-columns: 1fr;
+      }
+
+      .tline::before {
+        display: none;
+      }
+
+      .titem {
+        text-align: left;
+        padding: 10px 10px 10px 44px;
+        border-radius: 14px;
+        border: 1px solid rgba(233, 213, 255, .12);
+        background: rgba(255, 255, 255, .03);
+      }
+
+      .tlabel {
+        position: static;
+        transform: none;
+        width: auto;
+      }
+
+      .titem .dot {
+        top: 14px;
+        left: 22px;
+        transform: none;
+      }
+
+      .split {
+        grid-template-columns: 1fr;
+      }
+
+      .miniStats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .impactGrid {
+        grid-template-columns: 1fr;
+      }
+
+      .serviceGrid {
+        grid-template-columns: 1fr;
+      }
+
+      .dhoGrid {
+        grid-template-columns: 1fr;
+      }
+
+      .journey {
+        grid-template-columns: 1fr;
+      }
+
+      .journeyLabel {
+        writing-mode: horizontal-tb;
+        transform: none;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .whyGrid {
+        grid-template-columns: 1fr;
+      }
+
+      .cornerCtas {
+        position: static;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 14px auto 0;
+        width: min(var(--max), 100%);
+      }
+
+      .cornerCtas a {
+        width: auto;
+        min-width: 160px;
+      }
+
+      /* Força elementos do rodapé a seguirem o fluxo normal */
+      .sideNav,
+      .socialLinks,
+      .legalLinks,
+      .siteFooter {
+        position: static !important;
+        transform: none !important;
+        width: auto !important;
+        height: auto !important;
+        inset: auto !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        pointer-events: auto !important;
+      }
+
+      .sideNav {
+        margin: 40px auto 20px !important;
+        display: flex !important;
+        gap: 30px !important;
+        justify-content: center !important;
+      }
+
+      .navArrow {
+        width: 50px !important;
+        height: 50px !important;
+      }
+
+      .socialLinks {
+        margin: 30px auto 20px !important;
+        gap: 12px !important;
+      }
+
+      .legalLinks {
+        margin: 20px auto 12px !important;
+        padding: 0 20px !important;
+        gap: 8px !important;
+      }
+
+      .siteFooter {
+        margin: 0 auto 30px !important;
+        padding: 0 20px !important;
+        pointer-events: none !important;
+      }
+    }
+
+    @media (max-height: 720px) and (min-width: 861px) {
+      .panel {
+        overflow: auto;
+      }
+    }
+
+    /* Scrollbar discreta quando habilitada */
+    .panel::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .panel::-webkit-scrollbar-thumb {
+      background: rgba(233, 213, 255, .18);
+      border-radius: 999px;
+      border: 3px solid rgba(0, 0, 0, .15);
+    }
+
+
+    /* ======= AJUSTES PONTUAIS — FUNDADORA (DESKTOP) =======
+       Pedido do usuário:
+       1) distância entre "Lisandra Lencina" e a foto = 10px
+       2) distância entre "Vive o empreendedorismo..." e a linha do tempo = 10px
+       Obs: somente no capítulo "fundadora", mantendo o restante do arquivo intacto.
+    */
+    @media (min-width: 861px) {
+
+      /* Layout em 2 colunas reais, com gap vertical de 10px (título↔perfil e lede↔timeline) */
+      article.chapter[data-tab="fundadora"] .chapterStage {
+        grid-template-columns: 360px 1fr;
+        grid-template-rows: auto 1fr;
+        gap: 10px 18px;
+      }
+
+      /* Quebra o bloco de título/descrição para que ocupem colunas diferentes (sem empurrar o perfil) */
+      article.chapter[data-tab="fundadora"] .chapterTitle {
+        display: contents;
+      }
+
+      article.chapter[data-tab="fundadora"] .chapterTitle>div {
+        display: contents;
+      }
+
+      article.chapter[data-tab="fundadora"] .chapterTitle h2 {
+        grid-column: 1;
+        grid-row: 1;
+        text-align: center;
+        align-self: end;
+        /* garante o "10px" até a foto mesmo com lede maior */
+        position: static;
+        left: auto;
+        width: auto;
+      }
+
+      article.chapter[data-tab="fundadora"] .chapterTitle .lede {
+        grid-column: 2;
+        grid-row: 1;
+        text-align: center;
+        align-self: end;
+        /* garante o "10px" até a timeline */
+        margin: 0;
+        /* remove margem superior do lede neste capítulo (desktop) */
+      }
+
+      /* Traz profile e timeline para a 2ª linha do grid principal */
+      article.chapter[data-tab="fundadora"] .founderGrid {
+        display: contents;
+      }
+
+      article.chapter[data-tab="fundadora"] .profile {
+        grid-column: 1;
+        grid-row: 2;
+        align-self: start;
+      }
+
+      article.chapter[data-tab="fundadora"] .timeline {
+        grid-column: 2;
+        grid-row: 2;
+        align-self: start;
+
+        /* remove respiro superior para aproximar da descrição (10px) */
+        padding-top: 0;
+      }
+
+      article.chapter[data-tab="fundadora"] .timelineHead {
+        display: none;
+      }
+
+      article.chapter[data-tab="fundadora"] .tline {
+        margin-top: 0;
+      }
+
+      /* Fundadora: descer bloco da direita (descricao + timeline) 80px */
+      article.chapter[data-tab="fundadora"] .chapterTitle .lede,
+      article.chapter[data-tab="fundadora"] .timeline {
+        transform: translateY(80px);
+      }
+    }
+
+    /* ========= TOP RIGHT NAV (Página Inicial + More Menu) ========= */
+    .topRightNav {
+      position: absolute;
+      top: clamp(14px, 2.6vw, 28px);
+      right: clamp(14px, 2.6vw, 28px);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+      z-index: 100;
+      pointer-events: auto;
+    }
+
+    .navBtn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: rgba(244, 244, 248, 0.92);
+      padding: 13.5px 20px;
+      border-radius: 12px;
+      font-size: 14.5px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+    }
+
+    .navBtn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      color: #fff;
+    }
+
+    .navBtn:active {
+      transform: translateY(0);
+    }
+
+    .navBtn.more {
+      padding: 10.5px 16px;
+      letter-spacing: normal;
+      font-size: 18px;
+    }
+
+    /* Dropdown More Menu */
+    .moreMenu {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      width: 240px;
+      background: rgba(15, 15, 25, 0.85);
+      border: 1px solid rgba(233, 213, 255, 0.15);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 18px;
+      padding: 8px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    .moreMenu.is-open {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .moreMenu a,
+    .moreMenu button {
+      background: transparent;
+      border: 0;
+      color: rgba(244, 244, 248, 0.85);
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 14px;
+      text-align: left;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+      display: block;
+      width: 100%;
+    }
+
+    .moreMenu a:hover,
+    .moreMenu button:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      padding-left: 20px;
+    }
+
+    /* ========= SIDE NAVIGATION ARROWS ========= */
+    .sideNav {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      right: 0;
+      transform: translateY(-50%);
+      display: flex;
+      justify-content: space-between;
+      padding: 0 clamp(10px, 2vw, 30px);
+      pointer-events: none;
+      z-index: 90;
+    }
+
+    .navArrow {
+      width: clamp(40px, 5vw, 56px);
+      height: clamp(40px, 5vw, 56px);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: rgba(255, 255, 255, 0.5);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      pointer-events: auto;
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      text-decoration: none;
+      font-size: 24px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .navArrow:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #fff;
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+      transform: scale(1.1);
+    }
+
+    .navArrow:active {
+      transform: scale(0.95);
+    }
+
+    .navArrow.is-hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.8);
+    }
+
+    @media (max-width: 1024px) {
+      .sideNav {
+        bottom: 30px;
+        top: auto;
+        transform: none;
+        justify-content: center;
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 860px) {
+
+      /* RESET TOTAL MOBILE: Garante que tudo flua sem sobreposição */
+      html,
+      body {
+        height: auto !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+      }
+
+      .about {
+        height: auto !important;
+        min-height: 100svh !important;
+        overflow-y: visible !important;
+        padding-bottom: 60px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+      }
+
+      .shell {
+        position: relative !important;
+        height: auto !important;
+        min-height: 0 !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        pointer-events: none !important;
+        margin-bottom: 20px !important;
+      }
+
+      .shell>* {
+        pointer-events: auto !important;
+      }
+
+      .panel {
+        position: relative !important;
+        overflow: visible !important;
+        height: auto !important;
+        min-height: 0 !important;
+        display: block !important;
+      }
+
+      .panelInner {
+        height: auto !important;
+        min-height: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 24px !important;
+        padding-bottom: 20px !important;
+      }
+
+      .chapter {
+        height: auto !important;
+        min-height: 0 !important;
+        overflow: visible !important;
+        display: none;
+        /* show logic remains in scripts */
+      }
+
+      .chapter.is-active {
+        display: flex !important;
+        flex-direction: column !important;
+      }
+
+      .chapterStage {
+        height: auto !important;
+        min-height: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 24px !important;
+        padding: 0 20px !important;
+      }
+
+      /* Força elementos do rodapé a seguirem o fluxo normal */
+      .sideNav,
+      .socialLinks,
+      .legalLinks,
+      .siteFooter {
+        position: static !important;
+        transform: none !important;
+        width: 100% !important;
+        max-width: var(--max) !important;
+        height: auto !important;
+        inset: auto !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        pointer-events: auto !important;
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        align-items: center !important;
+      }
+
+      .sideNav {
+        margin: 40px auto 30px !important;
+        gap: 30px !important;
+      }
+
+      .navArrow {
+        width: 56px !important;
+        height: 56px !important;
+        position: static !important;
+        transform: none !important;
+      }
+
+      .socialLinks {
+        margin: 30px auto 20px !important;
+        gap: 12px !important;
+      }
+
+      .legalLinks {
+        margin: 20px auto 12px !important;
+        padding: 0 20px !important;
+        gap: 8px 15px !important;
+        font-size: 13px !important;
+      }
+
+      .siteFooter {
+        margin: 10px auto 40px !important;
+        padding: 0 20px !important;
+        text-align: center !important;
+        display: block !important;
+        pointer-events: none !important;
+        font-size: 12px !important;
+        color: rgba(244, 244, 248, .4) !important;
+      }
+    }
+
+    /* Ajuste de Navegação Mobile: Ocultar botão "Página Inicial" do topo */
+    @media (max-width: 860px) {
+      .navBtn:not(.more) {
+        display: none;
+      }
+    }
+
+    /* Exibir "Página Inicial" no menu dropdown apenas no mobile */
+    .mobileOnlyLink {
+      display: none !important;
+    }
+
+    @media (max-width: 860px) {
+      .mobileOnlyLink {
+        display: block !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="about" aria-label="Sobre nós">
+    <div class="about__bg" aria-hidden="true"></div>
+    <div class="about__photo" aria-hidden="true"></div>
+    <div class="about__overlay" aria-hidden="true"></div>
+    <div class="about__glow" aria-hidden="true"></div>
+    <div class="orb o1" aria-hidden="true"></div>
+    <div class="orb o2" aria-hidden="true"></div>
+    <div class="orb o3" aria-hidden="true"></div>
+
+    <div class="topRightNav">
+      <a href="index.html" class="navBtn">Página Inicial</a>
+      <button type="button" class="navBtn more" id="moreBtn" aria-haspopup="true" aria-expanded="false">⋮</button>
+
+      <div class="moreMenu" id="moreMenu" role="menu">
+        <a href="index.html" class="mobileOnlyLink" role="menuitem">Página Inicial</a>
+        <a href="https://calendly.com/lisandra-lencina/lens-by-lis" target="_blank" rel="noopener"
+          role="menuitem">Agendar conversa</a>
+        <a href="inscricao.html" role="menuitem">Inscreva-se</a>
+        <a href="conteudos.html" role="menuitem">Conteúdos</a>
+        <button type="button" onclick="document.getElementById('openServicesInline')?.click();" role="menuitem">Conheça
+          nossos serviços</button>
+      </div>
+    </div>
+
+    <div class="wrap shell">
+      <div class="topbar">
+        <a class="brand" href="index.html" aria-label="Voltar para a página inicial">
+          <span class="brand__name"><span class="brand__dot" aria-hidden="true"></span>Lens by Lis</span>
+          <span class="brand__tag">Sobre nós</span>
+        </a>
+
+        <nav class="chapterNav" aria-label="Capítulos">
+          <button class="chipDropdownTrigger" type="button" id="chipDropdownBtn" aria-label="Ver mais seções">
+            <svg width="12" height="7" viewBox="0 0 12 7" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 1l5 5 5-5" />
+            </svg>
+          </button>
+          <button class="chip is-active" type="button" data-tab="quem" aria-selected="true"><span class="chipText">Quem
+              somos</span></button>
+          <button class="chip" type="button" data-tab="fundadora" aria-selected="false"><span class="chipText">A
+              fundadora</span></button>
+          <button class="chip" type="button" data-tab="valores" aria-selected="false"><span class="chipText">Missão e
+              valores</span></button>
+          <button class="chip" type="button" data-tab="problemas1" aria-selected="false"><span class="chipText">Cenário
+              atual</span></button>
+          <button class="chip" type="button" data-tab="problemas2" aria-selected="false"><span class="chipText">Impactos
+              do cenário</span></button>
+          <button class="chip" type="button" data-tab="servicos" aria-selected="false"><span class="chipText">Como
+              ajudamos</span></button>
+          <button class="chip" type="button" data-tab="parceiros" aria-selected="false"><span
+              class="chipText">Parceiros</span></button>
+          <button class="chip" type="button" data-tab="diferenciais" aria-selected="false"><span
+              class="chipText">Diferenciais</span></button>
+        </nav>
+      </div>
+
+      <div class="hintRow" aria-label="Guia de leitura">
+        <div class="progress">
+          <span id="capLabel">Capítulo 1 de 7</span>
+          <span class="progressBar" aria-hidden="true"><i id="capBar"></i></span>
+        </div>
+        <div>Leitura guiada, sem scroll no desktop</div>
+      </div>
+
+      <section class="panel" id="panel" aria-live="polite">
+        <div class="panelInner">
+
+          <!-- 1) Quem somos -->
+          <article class="chapter is-active chapterAnim" data-tab="quem">
+            <div class="chapterStage">
+              <div class="chapterTitle">
+                <div>
+                  <h1 class="glowText">Descomplicamos o desenvolvimento humano no trabalho</h1>
+                  <p class="lede">
+                    Somos uma consultoria de negócios com foco em <span class="hi">Desenvolvimento Humano</span>,
+                    nascida da experiência holística de sua fundadora em grandes multinacionais e no empreendedorismo.
+                  </p>
+                </div>
+              </div>
+
+              <div class="whoCards">
+                <div class="card missionCard">
+                  <h3>Nossa missão</h3>
+                  <p>
+                    Ajudar pessoas e negócios a alinhar objetivos através do desenvolvimento humano prático, aplicado a
+                    realidade com clareza, método e execução, para gerar resultados sustentáveis.
+                  </p>
+                </div>
+
+                <div class="card moveCard">
+                  <h3>O que nos move</h3>
+                  <p>
+                    Integramos dados, métodos e desenvolvimento humano para transformar conflitos em oportunidades para
+                    potencializar performance com a qualidade de vida.
+                  </p>
+                  <ul class="bullets">
+                    <li>Fazer para aprender</li>
+                    <li>Explorar com método</li>
+                    <li>Transformar para performar</li>
+                  </ul>
+                </div>
+
+                <div class="card audienceCard">
+                  <h3>Para quem</h3>
+                  <ul class="bullets">
+                    <li><span class="hi">Pessoas</span>: carreira, repertório e execução com método</li>
+                    <li><span class="hi">Empresas</span>: diagnóstico, estratégia e desenvolvimento organizacional</li>
+                    <li><span class="hi">Parceiros</span>: projetos em conjunto e alavancas de impacto</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 2) A fundadora -->
+          <article class="chapter" data-tab="fundadora">
+            <div class="chapterStage">
+              <div class="chapterTitle">
+                <div>
+                  <h2 class="glowText">Lisandra Lencina</h2>
+                  <p class="lede">
+                    Vive o empreendedorismo desde a juventude e há 10 anos ajuda pessoas e negócios a alinharem seus
+                    interesses e resultados.
+                  </p>
+                </div>
+              </div>
+
+              <div class="founderGrid">
+                <div class="profile">
+                  <div class="avatar" aria-label="Foto da fundadora">
+                    <img src="assets/imagens/partner-people-business-dho-lisandra-lencina.jpg"
+                      alt="Foto de Lisandra Lencina"
+                      onerror="this.remove(); document.getElementById('avatarFallback').style.display='grid';" />
+                    <div class="avatarFallback" id="avatarFallback" style="display:none;">LL</div>
+                  </div>
+                  <div class="formations">
+                    <b>Formações:</b> Administração de Empresas, MBA em Gestão de Negócios, Especialização em RH e
+                    Coaching.
+
+                  </div>
+                </div>
+
+                <div class="timeline">
+                  <div class="timelineHead">
+                    <!-- título removido -->
+
+                  </div>
+
+                  <div class="tline">
+                    <ol class="titems">
+                      <li class="titem">
+                        <span class="dot" aria-hidden="true"></span>
+                        <div class="tlabel">
+                          <small class="tyear">2008</small>
+                          <b>Empreendedorismo</b>
+                          <small class="tdesc">(Familiar)</small>
+                        </div>
+                      </li>
+                      <li class="titem">
+                        <span class="dot" aria-hidden="true"></span>
+                        <div class="tlabel">
+                          <small class="tyear">2013</small>
+                          <b>Projetos Educacionais</b>
+                          <small class="tdesc">(Gov-SP, Henfil, Itaú)</small>
+                        </div>
+                      </li>
+                      <li class="titem">
+                        <span class="dot" aria-hidden="true"></span>
+                        <div class="tlabel">
+                          <small class="tyear">2016</small>
+                          <b>Inteligência de Mercado</b>
+                          <small class="tdesc">(IDC, H. Strattner)</small>
+                        </div>
+                      </li>
+                      <li class="titem">
+                        <span class="dot" aria-hidden="true"></span>
+                        <div class="tlabel">
+                          <small class="tyear">2019</small>
+                          <b>RH e DHO</b>
+                          <small class="tdesc">(Acer, Samsung, Smart Beauty)</small>
+                        </div>
+                      </li>
+                      <li class="titem is-highlight">
+                        <span class="dot" aria-hidden="true"></span>
+                        <div class="tlabel">
+                          <small class="tyear">2025</small>
+                          <b>LENS Partner</b>
+                        </div>
+                      </li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 3) Missao e valores -->
+          <article class="chapter" data-tab="valores">
+            <div class="chapterStage">
+              <div class="chapterTitle">
+                <div>
+                  <h2 class="glowText">Desenvolvimento através de atitudes coerentes</h2>
+                  <p class="lede">Ajudamos pessoas e negócios a alcançar objetivos por meio do desenvolvimento humano
+                    aplicado, com atitudes coerentes, para gerar e impulsionar resultados sustentáveis.</p>
+                </div>
+              </div>
+
+
+              <h3 class="sectionSubtitle">Nossas atitudes e valores</h3>
+
+              <div class="valuesGrid">
+                <div class="valueList" aria-label="Valores">
+                  <div class="value">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path fill="currentColor"
+                        d="M21 8h-6.6l-1.2-2.4A2 2 0 0 0 11.4 4H3a1 1 0 0 0-1 1v3h19v2H2v9a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1Zm-9.6-2a.5.5 0 0 1 .45.28L12.9 8H4V6h7.4Z" />
+                    </svg>
+                    <div>
+                      <b>Acordos</b>
+                      <span>Cada objetivo precisa fazer sentido para todos. Combinar antes, ajustar depois.</span>
+                    </div>
+                  </div>
+
+                  <div class="value">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path fill="currentColor" d="M4 19h16v2H4v-2Zm1-2h3V7H5v10Zm5 0h3V3h-3v14Zm5 0h3V11h-3v6Z" />
+                    </svg>
+                    <div>
+                      <b>Evidência como base</b>
+                      <span>Priorizar dados e comportamentos reais. Decidir com método, não apenas opinião.</span>
+                    </div>
+                  </div>
+
+                  <div class="value">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path fill="currentColor"
+                        d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7Zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10Zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z" />
+                    </svg>
+                    <div>
+                      <b>Transparência</b>
+                      <span>Feedback honesto e comunicação direta. Falar o que precisa ser dito com respeito.</span>
+                    </div>
+                  </div>
+
+                  <div class="value">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path fill="currentColor"
+                        d="M12 2 1 7l11 5 9-4.09V17h2V7L12 2Zm0 13L3.24 8.86 12 5l8.76 3.86L12 15Zm-7 3.11V13l7 3 7-3v5.11L12 22 5 18.11Z" />
+                    </svg>
+                    <div>
+                      <b>Educação</b>
+                      <span>Desenvolvimento contínuo para autonomia e inovação. Aprender sempre, transmitir
+                        aprendizado.</span>
+                    </div>
+                  </div>
+
+                  <div class="value">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path fill="currentColor"
+                        d="M19 3H5a2 2 0 0 0-2 2v6h2V5h14v14h-6v2h6a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2ZM3 21l6-2 10-10-4-4L5 15l-2 6Zm4.17-4.83 7.66-7.66 1.66 1.66-7.66 7.66-2.11.7.45-2.36Z" />
+                    </svg>
+                    <div>
+                      <b>Co-criação</b>
+                      <span>Planos feitos com e não para o cliente. Construir junto, nunca sozinho.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 4) Problemas, cenario -->
+          <article class="chapter" data-tab="problemas1">
+            <div class="chapterStage">
+              <div class="chapterTitle">
+                <div>
+                  <h2 class="glowText">O desafio do cenário atual</h2>
+                  <p class="lede">
+                    O futuro do trabalho parece complexo, porque a maioria das dores não é técnica, é humana. O desafio
+                    é
+                    identificar e cuidar do invisível: expectativas, confiança, limites e coerência.
+                  </p>
+                </div>
+              </div>
+
+              <style>
+                /* Centralizar título e lede da seção Cenário (problemas1) */
+                article.chapter[data-tab="problemas1"] .chapterTitle {
+                  justify-content: center;
+                  text-align: center;
+                }
+
+                article.chapter[data-tab="problemas1"] .chapterTitle .lede {
+                  margin: 8px auto 0;
+                  max-width: 800px;
+                }
+              </style>
+
+              <div class="scenarioGrid">
+
+                <div class="leftColumn">
+                  <!-- Card 1: Negócios -->
+                  <div class="card scenarioCard">
+                    <img src="assets/imagens/partner-people-business-dho-economia-trabalho.png"
+                      alt="Gráfico economia e trabalho" loading="lazy" />
+                    <a href="#" class="sourceLink"
+                      onclick="confirmLink(event, 'https://www.cnnbrasil.com.br/branded-content/nacional/o-impacto-do-custo-brasil-na-economia-nacional/')">
+                      Fonte: cnnbrasil.com.br
+                    </a>
+                    <div class="scenarioOverlay">
+                      <p><strong style="font-size: 14px;">62%</strong> <span class="hi">Empresários</span> afirmam que
+                        falta de mão de obra qualificada compromete o
+                        crescimento.</p>
+                    </div>
+                  </div>
+
+                  <!-- Card 2: Trabalhadores -->
+                  <div class="card scenarioCard">
+                    <img src="assets/imagens/partner-people-business-dho-trabalho-afastamento.png"
+                      alt="Gráfico trabalho e afastamento" loading="lazy" />
+                    <a href="#" class="sourceLink"
+                      onclick="confirmLink(event, 'https://g1.globo.com/trabalho-e-carreira/noticia/2025/03/10/crise-de-saude-mental-brasil-tem-maior-numero-de-afastamentos-por-ansiedade-e-depressao-em-10-anos.ghtml')">
+                      Fonte: g1.globo.com
+                    </a>
+                    <div class="scenarioOverlay">
+                      <p><strong style="font-size: 14px;">68%</strong> Aumento de pedidos de licenças no INSS por saúde
+                        mental em 10 anos.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="rightColumn">
+                  <!-- Card 3: DHO 360 (Direita) -->
+                  <div class="card dhoCard">
+                    <div class="dhoHeader">
+                      <h3>50% dos trabalhadores acreditam que o Autodesenvolvimento ajudaria a atingir seus objetivos
+                        pessoais</h3>
+                    </div>
+
+                    <div class="dhoGrid">
+                      <!-- Item 1: Pirâmide (Topo retilíneo) -->
+                      <div class="dhoItem">
+                        <p class="dhoCaption">Top 3 ações para alcançar objetivos segundo os trabalhadores</p>
+                        <div class="pyramidChart">
+                          <div class="pLevel p1"><span>1. Desenvolver condições</span></div>
+                          <div class="pLevel p2"><span>2. Novas habilidades</span></div>
+                          <div class="pLevel p3"><span>3. Impulsionar comportamentos</span></div>
+                        </div>
+                      </div>
+
+                      <!-- Item 3: Pizza 30% (Na ordem de leitura visual, direita superior) -->
+                      <div class="dhoItem">
+                        <div class="pieChart" style="--p:30; --c:var(--pitaya);">
+                          <span>30%</span>
+                        </div>
+                        <p class="dhoText">dos negócios focarão em aquisição de novos clientes e canais e aumento de
+                          receita orgânica.</p>
+                      </div>
+
+                      <!-- Item 2: Texto destaque <1% (Esquerda inferior) -->
+                      <div class="dhoItem">
+                        <div class="bigStat">&lt;1%</div>
+                        <p class="dhoText">contaria com a ajuda do RH ou do líder para se desenvolver pois acreditam que
+                          a companhia não os ajudarão.</p>
+                      </div>
+
+                      <!-- Item 4: Texto destaque Barreiras (Direita inferior) -->
+                      <div class="dhoItem">
+                        <p class="dhoText">
+                          Mas reconhecem que as maiores barreiras são <span class="hi">processos e comunicação
+                            desalinhados</span>, e <span class="hi">saída de profissionais chaves</span>.
+                        </p>
+                      </div>
+                    </div>
+
+                    <a href="#" class="dhoSource" onclick="confirmLink(event, 'https://lisdho.github.io/DHO360/')">
+                      Fonte: DHO360
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </article>
+
+          <!-- 5) Impactos do cenário -->
+          <article class="chapter" data-tab="problemas2">
+            <div class="chapterStage">
+              <div class="chapterTitle">
+                <div>
+                  <h2 class="glowText">Consequências da falta de desenvolvimento humano</h2>
+                  <p class="lede">
+                    Os efeitos da falta de desenvolvimento humano reflete no desempenho do negócio e na experiência do
+                    trabalhador.
+                  </p>
+                </div>
+              </div>
+
+              <div class="impactGrid">
+                <div class="impactCol">
+                  <h3>Nos negócios</h3>
+                  <ul class="impactList">
+                    <li class="impactItem">
+                      <div class="impactNum">01</div>
+                      <div><b>Baixo ROI</b><span>Investimento sem retorno mensurável</span></div>
+                    </li>
+                    <li class="impactItem">
+                      <div class="impactNum">02</div>
+                      <div><b>Custos invisíveis</b><span>Retrabalho, turnover e perda de produtividade</span></div>
+                    </li>
+                    <li class="impactItem">
+                      <div class="impactNum">03</div>
+                      <div><b>Competitividade</b><span>Perda de espaço no mercado</span></div>
+                    </li>
+                    <li class="impactItem">
+                      <div class="impactNum">04</div>
+                      <div><b>Sobrecarga</b><span>Liderança e donos esgotados</span></div>
+                    </li>
+                    <li class="impactItem">
+                      <div class="impactNum">05</div>
+                      <div><b>Marca</b><span>Reputação como empregador fragilizada</span></div>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="impactCol">
+                  <h3>Nos trabalhadores</h3>
+                  <ul class="impactList">
+                    <li class="impactItem">
+                      <div class="impactNum">01</div>
+                      <div><b>Relações frágeis</b><span>Conflitos e falta de confiança</span></div>
+                    </li>
+                    <li class="impactItem">
+                      <div class="impactNum">02</div>
+                      <div><b>Desengajamento</b><span>Sensação de injustiça e desmotivação</span></div>
+                    </li>
+                    <li class="impactItem">
+                      <div class="impactNum">03</div>
+                      <div><b>Estagnação</b><span>Carreira travada, medo de obsolescência</span></div>
+                    </li>
+                    <li class="impactItem">
+                      <div class="impactNum">04</div>
+                      <div><b>Vida pessoal</b><span>Perda de sentido no trabalho</span></div>
+                    </li>
+                    <li class="impactItem">
+                      <div class="impactNum">05</div>
+                      <div><b>Adoecimento</b><span>Sobrecarga emocional e burnout</span></div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 6) Nossos servicos -->
+          <article class="chapter" data-tab="servicos">
+            <div class="chapterStage">
+              <div class="chapterTitle">
+                <div>
+                  <h2 class="glowText">Desenvolvendo e sustentando estratégias de pessoas</h2>
+                  <p class="lede">
+                    Atuamos em consultoria e serviços em três frentes que vão do técnico ao humano, dos dados às
+                    pessoas, com foco no desenvolvimento de pessoas e negócios.
+                  </p>
+                </div>
+              </div>
+
+              <div class="servicesContainer">
+                <div class="triadContainer">
+                  <button class="triadCircle" data-service="carreira">
+                    <span>Desenvolvimento<br>de carreira</span>
+                  </button>
+                  <button class="triadCircle" data-service="analytics">
+                    <span>People<br>Analytics</span>
+                  </button>
+                  <button class="triadCircle" data-service="cultura">
+                    <span>Clima e<br>cultura</span>
+                  </button>
+                  <!-- Decorative connecting lines/overlay -->
+                  <div class="triadOverlay" aria-hidden="true"></div>
+                </div>
+
+                <!-- Banner de Formatos (Mini Banner) -->
+                <div class="formatsBanner">
+                  Formatos disponíveis: <strong>Prateleira</strong> (serviços prontos) • <strong>Assinatura</strong>
+                  (anual) • <strong>Projetos</strong> (3 a 6 meses)
+                </div>
+
+                <div class="serviceDetails">
+                  <div class="detailContent" id="detail-carreira">
+                    <h3>Desenvolvimento de carreira</h3>
+                    <p class="detailDesc">
+                      Para profissionais que buscam evolução, transição ou maior performance. O foco é destravar
+                      potencial e alinhar objetivos pessoais com oportunidades de mercado.
+                    </p>
+                    <ul class="detailList">
+                      <li>PDI (Plano de Desenvolvimento Individual)</li>
+                      <li>Liderança e Gestão de Pessoas</li>
+                      <li>Transição de Carreira</li>
+                      <li>Sucessão e Talentos</li>
+                      <li>Recolocação Profissional (Outplacement)</li>
+                      <li>Desenvolvimento de Equipes</li>
+                      <li>Coaching e Mentoria</li>
+                    </ul>
+                  </div>
+
+                  <div class="detailContent" id="detail-analytics" hidden>
+                    <h3>People Analytics</h3>
+                    <p class="detailDesc">
+                      Para empresas que querem transformar dados em inteligência para tomada de decisão. Monitoramento
+                      de indicadores que realmente importam para o negócio e para as pessoas.
+                    </p>
+                    <ul class="detailList">
+                      <li>KPIs e Indicadores de RH</li>
+                      <li>Dashboards de Gestão</li>
+                      <li>Relatórios Executivos</li>
+
+                    </ul>
+
+                    <!-- Botão Delayed (MOVED do container para debaixo da descrição) -->
+                    <button id="delayedServiceBtn" class="btnPulse" type="button" aria-hidden="true">Conheça nossos
+                      serviços</button>
+                  </div>
+
+                  <div class="detailContent" id="detail-cultura" hidden>
+                    <h3>Clima e cultura</h3>
+                    <p class="detailDesc">
+                      Para empresas que prezam por ambientes saudáveis e resultados sustentáveis. Atuamos no diagnóstico
+                      e na construção de uma cultura forte, coerente e engajadora.
+                    </p>
+                    <ul class="detailList">
+                      <li>Pesquisa de Clima Organizacional</li>
+                      <li>Onboarding e Integração</li>
+                      <li>Comunicação Interna</li>
+                      <li>Campanhas de Engajamento</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <style>
+                /* Estilos da Tríade Interativa */
+                .servicesContainer {
+                  position: relative;
+                  width: 100%;
+                  min-height: 480px;
+                  /* Altura para acomodar a animação */
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  overflow: hidden;
+                  /* Garante que nada vaze */
+                }
+
+                .triadContainer {
+                  position: relative;
+                  width: 380px;
+                  height: 380px;
+                  top: -15%;
+                  transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+                  z-index: 2;
+                }
+
+                /* Estado ativo: move para a esquerda */
+                .servicesContainer.is-active .triadContainer {
+                  transform: translateX(-210px);
+                }
+
+                .triadCircle {
+                  position: absolute;
+                  width: 200px;
+                  height: 200px;
+                  border-radius: 50%;
+                  border: 1px solid rgba(233, 213, 255, .3);
+                  background: rgba(124, 58, 237, .15);
+                  backdrop-filter: blur(8px);
+                  -webkit-backdrop-filter: blur(8px);
+                  color: #fff;
+                  font-size: 15px;
+                  font-weight: 600;
+                  line-height: 1.3;
+                  cursor: pointer;
+                  transition: all 0.4s ease;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  text-align: center;
+                  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+                  z-index: 1;
+                }
+
+                .triadCircle span {
+                  pointer-events: none;
+                  /* Garante clique no botão */
+                }
+
+                /* Posicionamento dos Círculos (Formato de Trevo/Tríade) */
+                .triadCircle:nth-child(1) {
+                  /* Topo */
+                  top: 15%;
+                  left: 50%;
+                  transform: translateX(-50%);
+                }
+
+                .triadCircle:nth-child(2) {
+                  /* Esquerda Inferior */
+                  bottom: 0;
+                  left: 0;
+                }
+
+                .triadCircle:nth-child(3) {
+                  /* Direita Inferior */
+                  bottom: 0;
+                  right: 0;
+                }
+
+                /* Hover effects */
+                .triadCircle:hover {
+                  background: rgba(168, 85, 247, .25);
+                  border-color: rgba(233, 213, 255, .6);
+                  transform: scale(1.05);
+                  z-index: 3;
+                }
+
+                .triadCircle:nth-child(1):hover {
+                  transform: translateX(-50%) scale(1.05);
+                }
+
+                /* Active state styling for circle */
+                .triadCircle.is-selected {
+                  background: rgba(255, 79, 163, .25);
+                  /* Pitaya tint */
+                  border-color: rgba(255, 79, 163, .6);
+                  box-shadow: 0 0 25px rgba(255, 79, 163, 0.3);
+                  z-index: 4;
+                }
+
+                .servicesContainer.is-active .triadCircle:nth-child(1).is-selected {
+                  transform: translateX(-50%) scale(1.05);
+                }
+
+                /* Ajustes de posição para compensar o scale no hover se necessário, 
+                   mas o transform individual sobrescreve. Vamos manter simples. */
+
+
+                /* Decorative Intersection (Opcional, overlay visual) */
+                .triadOverlay {
+                  position: absolute;
+                  inset: 0;
+                  pointer-events: none;
+                  mix-blend-mode: overlay;
+                }
+
+                /* Pulsing animation for the guide */
+                @keyframes pulseGuide {
+                  0% {
+                    box-shadow: 0 0 0 0 rgba(255, 79, 163, 0.4);
+                    border-color: rgba(255, 79, 163, 0.6);
+                  }
+
+                  50% {
+                    box-shadow: 0 0 0 15px rgba(255, 79, 163, 0);
+                    border-color: rgba(255, 79, 163, 0.3);
+                  }
+
+                  100% {
+                    box-shadow: 0 0 0 0 rgba(255, 79, 163, 0);
+                    border-color: rgba(255, 79, 163, 0.6);
+                  }
+                }
+
+                .triadCircle.is-pulsing {
+                  animation: pulseGuide 3s ease-in-out infinite;
+                  z-index: 5;
+                  /* Ensure it's on top when guiding */
+                  border-color: rgba(255, 79, 163, 0.8);
+                  background: rgba(255, 79, 163, 0.1);
+                }
+
+
+                /* Painel de Detalhes (Direita) */
+                .serviceDetails {
+                  position: absolute;
+                  left: 50%;
+                  top: 40%;
+                  transform: translateY(-50%) translateX(50px);
+                  width: 45%;
+                  max-width: 400px;
+                  opacity: 0;
+                  pointer-events: none;
+                  transition: all 0.5s ease 0.1s;
+                  /* Delay leve */
+                  padding-left: 32px;
+                  /* Espaço respiro */
+                }
+
+                .servicesContainer.is-active .serviceDetails {
+                  opacity: 1;
+                  pointer-events: auto;
+                  transform: translateY(-50%) translateX(0);
+                }
+
+                .detailContent {
+                  display: none;
+                  animation: fadeInRight 0.5s ease forwards;
+                }
+
+                .detailContent[style*="display: block"] {
+                  display: block;
+                }
+
+                /* Classe auxiliar controlada via JS, ou apenas display toggle */
+                .detailContent.is-visible {
+                  display: block;
+                }
+
+                .detailContent h3 {
+                  font-size: 20px;
+                  font-weight: 700;
+                  color: #fff;
+                  margin-bottom: 12px;
+                  border-bottom: 1px solid rgba(255, 79, 163, .3);
+                  padding-bottom: 8px;
+                  display: inline-block;
+                }
+
+                .detailDesc {
+                  font-size: 14.5px;
+                  line-height: 1.6;
+                  color: rgba(244, 244, 248, .9);
+                  margin-bottom: 16px;
+                }
+
+                .detailList {
+                  list-style: none;
+                  padding: 0;
+                  margin: 0;
+                }
+
+                .detailList li {
+                  position: relative;
+                  padding-left: 14px;
+                  margin-bottom: 8px;
+                  font-size: 13.5px;
+                  color: rgba(244, 244, 248, .75);
+                }
+
+                .detailList li::before {
+                  content: "•";
+                  color: var(--pitaya);
+                  position: absolute;
+                  left: 0;
+                  top: 0;
+                  font-weight: bold;
+                }
+
+                @keyframes fadeInRight {
+                  from {
+                    opacity: 0;
+                    transform: translateX(20px);
+                  }
+
+                  to {
+                    opacity: 1;
+                    transform: translateX(0);
+                  }
+                }
+
+                /* Responsividade */
+                @media (max-width: 860px) {
+                  .servicesContainer {
+                    flex-direction: column;
+                    min-height: auto;
+                    padding: 20px 0;
+                  }
+
+                  .servicesContainer.is-active .triadContainer {
+                    transform: translateY(-20px) scale(0.8);
+                    /* Sobe um pouco */
+                  }
+
+                  .triadContainer {
+                    width: 300px;
+                    height: 300px;
+                    margin-bottom: 20px;
+                  }
+
+                  .triadCircle {
+                    width: 160px;
+                    height: 160px;
+                    font-size: 13px;
+                  }
+
+                  .serviceDetails {
+                    position: relative;
+                    width: 100%;
+                    max-width: 100%;
+                    transform: none;
+                    opacity: 1;
+                    /* Sempre visível se ativo, ou oculto se nao */
+                    left: auto;
+                    right: auto;
+                    top: auto;
+                    padding-left: 0;
+                    margin-top: 20px;
+                    text-align: center;
+                    display: none;
+                    /* Oculto inicialmente mobile */
+                  }
+
+                  .servicesContainer.is-active .serviceDetails {
+                    display: block;
+                    transform: none;
+                  }
+
+                  .detailContent h3 {
+                    margin: 0 auto 12px;
+                  }
+
+                  .detailList {
+                    text-align: left;
+                    display: inline-block;
+                  }
+                }
+
+                /* Botão Pulsante (Delayed) */
+                .btnPulse {
+                  position: relative;
+                  display: block;
+                  margin: 28px auto 0;
+                  width: max-content;
+                  background: rgba(255, 102, 0, 0.1);
+                  /* Laranja bem suave */
+                  color: #ff8c42;
+                  /* Laranja elegante */
+                  border: 1px solid rgba(255, 140, 66, 0.4);
+                  padding: 10px 24px;
+                  border-radius: 999px;
+                  font-size: 13.5px;
+                  font-weight: 600;
+                  letter-spacing: 0.02em;
+                  cursor: pointer;
+                  opacity: 0;
+                  pointer-events: none;
+                  transition: opacity 0.8s ease, transform 0.8s ease;
+                  box-shadow: 0 0 15px rgba(255, 140, 66, 0.1);
+                  z-index: 10;
+                  /* Acima de outros elementos */
+                }
+
+                .btnPulse.is-visible {
+                  opacity: 1;
+                  pointer-events: auto;
+                  animation: pulseOrange 3s ease-in-out infinite;
+                }
+
+                .btnPulse:hover {
+                  background: rgba(255, 140, 66, 0.2);
+                  box-shadow: 0 0 25px rgba(255, 140, 66, 0.3);
+                  transform: scale(1.02);
+                }
+
+                @keyframes pulseOrange {
+                  0% {
+                    box-shadow: 0 0 0 0 rgba(255, 140, 66, 0.4);
+                    border-color: rgba(255, 140, 66, 0.6);
+                  }
+
+                  50% {
+                    box-shadow: 0 0 0 8px rgba(255, 140, 66, 0);
+                    border-color: rgba(255, 140, 66, 0.3);
+                  }
+
+                  100% {
+                    box-shadow: 0 0 0 0 rgba(255, 140, 66, 0);
+                    border-color: rgba(255, 140, 66, 0.6);
+                  }
+                }
+
+                /* Banner Formatos */
+                .formatsBanner {
+                  position: absolute;
+                  bottom: 12%;
+                  left: 50%;
+                  transform: translateX(-50%);
+                  font-size: 13px;
+                  color: rgba(244, 244, 248, 0.7);
+                  padding: 8px 24px;
+                  white-space: nowrap;
+                  pointer-events: none;
+                  z-index: 1;
+                  letter-spacing: 0.03em;
+                  width: max-content;
+                }
+
+                .formatsBanner strong {
+                  color: #fff;
+                  font-weight: 600;
+                }
+
+                @media (max-width: 860px) {
+                  .formatsBanner {
+                    position: relative;
+                    bottom: auto;
+                    left: auto;
+                    transform: none;
+                    margin: 20px auto 0;
+                    white-space: normal;
+                    text-align: center;
+                    line-height: 1.6;
+                  }
+                }
+
+                @keyframes scrollPartners {
+                  0% {
+                    transform: translateX(0);
+                  }
+
+                  100% {
+                    transform: translateX(-50%);
+                  }
+                }
+
+                /* Partners Showcase CSS */
+                .partnersShowcaseWrapper {
+                  width: 100%;
+                  max-width: 1000px;
+                  margin: 0 auto 0;
+                  position: relative;
+                  overflow: hidden;
+                  /* Fade mask (degrade invisível para visível nas bordas) */
+                  mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+                  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+                }
+
+                .partnersShowcase {
+                  display: flex;
+                  flex-wrap: nowrap;
+                  /* Single line */
+                  gap: 0;
+                  /* Removing gap to ensure seamless loop with margin */
+                  padding: 10px 0;
+                  width: max-content;
+                  animation: scrollPartners 60s linear infinite;
+                  /* Slow scroll */
+                }
+
+
+
+                .partnersShowcase:hover {
+                  animation-play-state: paused;
+                }
+
+                .partnerItem {
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  text-align: center;
+                  width: 160px;
+                  margin-right: 80px;
+                  /* Use margin instead of gap for precise calculation */
+                  flex-shrink: 0;
+                  /* Prevent shrinking */
+                }
+
+                .partnerPhoto {
+                  width: 120px;
+                  height: 120px;
+                  border-radius: 50%;
+                  overflow: hidden;
+                  margin-bottom: 16px;
+                  border: 1px solid rgba(255, 255, 255, 0.15);
+                  background: rgba(255, 255, 255, 0.05);
+                  transition: transform 0.3s ease, border-color 0.3s ease;
+                }
+
+                .partnerItem:hover .partnerPhoto {
+                  transform: scale(1.05);
+                  border-color: rgba(255, 140, 66, 0.6);
+                }
+
+                .partnerPhoto img {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                }
+
+                .partnerInfo {
+                  display: flex;
+                  flex-direction: column;
+                  gap: 6px;
+                }
+
+                .partnerDesc {
+                  font-size: 12px;
+                  color: rgba(244, 244, 248, 0.8);
+                  line-height: 1.4;
+                  margin: 0;
+                }
+
+                /* Convite Card Specific Styles */
+                .chapter[data-tab="parceiros"] .card {
+                  position: relative;
+                  margin-top: 40px;
+                  /* Spaced below partners */
+                  /* Glass Rosa Pitaya Tech */
+                  background: rgba(255, 79, 163, 0.08);
+                  border: 1px solid rgba(255, 79, 163, 0.3);
+                  backdrop-filter: blur(12px);
+                  -webkit-backdrop-filter: blur(12px);
+                  box-shadow: 0 0 30px rgba(255, 79, 163, 0.15), inset 0 0 20px rgba(255, 79, 163, 0.05);
+                  border-radius: 24px;
+                  clip-path: none;
+                  /* Ensure no cutout */
+                  max-width: 600px;
+                  margin-left: auto;
+                  margin-right: auto;
+                  text-align: center;
+                }
+
+                .chapter[data-tab="parceiros"] .card h3 {
+                  color: #fff;
+                  font-size: 15px;
+                  margin-bottom: 8px;
+                  display: block;
+                  /* Ensure it behaves correctly */
+                }
+
+                .chapter[data-tab="parceiros"] .card p {
+                  font-size: 12px;
+                  color: rgba(255, 255, 255, 0.85);
+                  line-height: 1.5;
+                }
+
+                .partnerLink {
+                  font-size: 13px;
+                  color: #FF8C42;
+                  /* LENS Orange */
+                  text-decoration: none;
+                  opacity: 0.8;
+                  transition: opacity 0.2s;
+                }
+
+                .partnerLink:hover {
+                  opacity: 1;
+                  text-decoration: underline;
+                }
+
+                .partnersNav {
+                  display: none;
+                  /* Hidden on desktop */
+                }
+
+                @media (max-width: 768px) {
+                  .partnersShowcaseWrapper {
+                    padding: 0 20px;
+                    max-width: 100%;
+                  }
+
+                  .partnersShowcase {
+                    flex-wrap: nowrap;
+                    justify-content: flex-start;
+                    gap: 30px;
+                    overflow-x: auto;
+                    scroll-behavior: smooth;
+                    scroll-snap-type: x mandatory;
+                    padding-bottom: 20px;
+                    -webkit-overflow-scrolling: touch;
+                    scrollbar-width: none;
+                    /* Firefox */
+                  }
+
+                  .partnersShowcase::-webkit-scrollbar {
+                    display: none;
+                    /* Chrome/Safari */
+                  }
+
+                  .partnerItem {
+                    min-width: 220px;
+                    /* Wider for better mobile view */
+                    scroll-snap-align: center;
+                  }
+
+                  .partnersNav {
+                    display: flex;
+                    justify-content: center;
+                    gap: 20px;
+                    margin-top: 10px;
+                  }
+
+                  .pNavBtn {
+                    background: rgba(255, 255, 255, 0.1);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    color: #fff;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    font-size: 20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    transition: background 0.2s;
+                  }
+
+                  .pNavBtn:hover,
+                  .pNavBtn:active {
+                    background: rgba(255, 255, 255, 0.25);
+                  }
+                }
+              </style>
+
+              <script>
+                (function () {
+                  const container = document.querySelector('.servicesContainer');
+                  const circles = document.querySelectorAll('.triadCircle');
+                  const contents = document.querySelectorAll('.detailContent');
+                  const delayedBtn = document.getElementById('delayedServiceBtn');
+                  let peopleTimer = null;
+
+                  // Sequence mapping: Current -> Next to pulse
+                  const guideSequence = {
+                    'carreira': 'cultura',
+                    'cultura': 'analytics',
+                    'analytics': null // End of guide
+                  };
+
+                  // Initialize: Pulse the first one
+                  const first = document.querySelector('.triadCircle[data-service="carreira"]');
+                  if (first) first.classList.add('is-pulsing');
+
+                  function hideDelayedBtn() {
+                    if (delayedBtn) {
+                      delayedBtn.classList.remove('is-visible');
+                      delayedBtn.setAttribute('aria-hidden', 'true');
+                    }
+                    if (peopleTimer) {
+                      clearTimeout(peopleTimer);
+                      peopleTimer = null;
+                    }
+                  }
+
+                  // Open modal on button click
+                  if (delayedBtn) {
+                    delayedBtn.addEventListener('click', (e) => {
+                      e.stopPropagation();
+                      // Assuming openModal is globally available or we trigger the inline opener
+                      const inlineOpener = document.getElementById('openServicesInline');
+                      if (inlineOpener) inlineOpener.click();
+                    });
+                  }
+
+                  circles.forEach(circle => {
+                    circle.addEventListener('click', () => {
+                      const service = circle.dataset.service;
+
+                      console.log('Clicked:', service); // Debug
+
+                      // Reset delayed button state on any click
+                      hideDelayedBtn();
+
+                      // 1. Activate container (move triad)
+                      container.classList.add('is-active');
+
+                      // 2. Stop pulsing THIS circle and mark as selected (cumulative)
+                      circle.classList.remove('is-pulsing');
+                      circle.classList.add('is-selected');
+
+                      // 3. Trigger next step in guide
+                      const nextService = guideSequence[service];
+                      if (nextService) {
+                        const nextCircle = document.querySelector(`.triadCircle[data-service="${nextService}"]`);
+                        // Only pulse if not already selected/visited
+                        if (nextCircle && !nextCircle.classList.contains('is-selected')) {
+                          // Remove pulse from others to be safe (ensure single focus)
+                          circles.forEach(c => c.classList.remove('is-pulsing'));
+                          nextCircle.classList.add('is-pulsing');
+                        }
+                      }
+
+                      // 4. Show corresponding content (Hide others)
+                      contents.forEach(content => {
+                        if (content.id === `detail-${service}`) {
+                          content.classList.add('is-visible');
+                          content.removeAttribute('hidden');
+                          content.style.display = 'block';
+                        } else {
+                          content.classList.remove('is-visible');
+                          content.setAttribute('hidden', '');
+                          content.style.display = 'none';
+                        }
+                      });
+
+                      // 5. Special logic for "People Analytics"
+                      if (service === 'analytics') {
+                        peopleTimer = setTimeout(() => {
+                          if (delayedBtn) {
+                            delayedBtn.classList.add('is-visible');
+                            delayedBtn.removeAttribute('aria-hidden');
+                          }
+                        }, 5000); // 5 seconds delay
+                      }
+                    });
+                  });
+
+                  // Partners Carousel Navigation (Mobile)
+                  const pContainer = document.getElementById('partnersScrollContainer');
+                  const pPrev = document.getElementById('pNavPrev');
+                  const pNext = document.getElementById('pNavNext');
+
+                  if (pContainer && pPrev && pNext) {
+                    pPrev.addEventListener('click', () => {
+                      pContainer.scrollBy({ left: -240, behavior: 'smooth' });
+                    });
+
+                    pNext.addEventListener('click', () => {
+                      pContainer.scrollBy({ left: 240, behavior: 'smooth' });
+                    });
+                  }
+
+                  // Duplicate items for infinite scroll (Desktop & Mobile Marquee)
+                  const showcase = document.querySelector('.partnersShowcase');
+                  if (showcase) {
+                    const items = showcase.innerHTML;
+                    showcase.innerHTML = items + items; // Duplicate content
+                  }
+                })();
+              </script>
+
+              <div class="journey" aria-label="Jornada de experiência">
+                <div class="journeyLabel">Fluxo operacional</div>
+                <div class="steps">
+                  <div class="step">
+                    <b>01</b>
+                    <strong>Diagnóstico</strong>
+                    <span>Análise profunda da situação atual</span>
+                  </div>
+                  <div class="step">
+                    <b>02</b>
+                    <strong>Plano de ação</strong>
+                    <span>Estratégia customizada e objetivos claros</span>
+                  </div>
+                  <div class="step">
+                    <b>03</b>
+                    <strong>Execução</strong>
+                    <span>Implementação e consultoria contínua</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="formats">
+                <span class="hi">Formatos disponíveis:</span> Prateleira (serviços prontos) • Assinatura (anual) •
+                Projetos (3 a 6 meses)
+              </div>
+            </div>
+          </article>
+
+          <!-- Parceiros -->
+          <article class="chapter" data-tab="parceiros">
+            <div class="chapterStage">
+              <div class="chapterTitle">
+                <div>
+                  <h2 class="glowText">Parcerias que agregam competências, escala e integração</h2>
+                  <p class="lede">
+                    Atuamos em rede para ampliar impacto quando faz sentido. Conectamos especialistas e soluções com
+                    escopo claro, ritmos de acompanhamento e métricas simples para garantir execução com qualidade e
+                    consistência.
+                  </p>
+                  <h3 style="margin-top: 24px; font-size: 16px; color: #fff;">Conheça alguns de nossos parceiros</h3>
+                </div>
+              </div>
+
+              <!-- Partners Showcase -->
+              <div class="partnersShowcaseWrapper">
+                <div class="partnersShowcase" id="partnersScrollContainer">
+                  <!-- Parceiro 1 -->
+                  <div class="partnerItem">
+                    <div class="partnerPhoto">
+                      <img src="assets/parceiros/parceiro1/fotoperfil.jpg" alt="Parceiro 1" loading="lazy">
+                    </div>
+                    <div class="partnerInfo">
+                      <p class="partnerDesc">Descrição do parceiro com foco na especialidade e entrega de valor.</p>
+                      <a href="#" class="partnerLink" target="_blank" rel="noopener">website.com</a>
+                    </div>
+                  </div>
+                  <!-- Parceiro 2 -->
+                  <div class="partnerItem">
+                    <div class="partnerPhoto">
+                      <img src="assets/parceiros/parceiro2/fotoperfil.jpg" alt="Parceiro 2" loading="lazy">
+                    </div>
+                    <div class="partnerInfo">
+                      <p class="partnerDesc">Descrição do parceiro com foco na especialidade e entrega de valor.</p>
+                      <a href="#" class="partnerLink" target="_blank" rel="noopener">website.com</a>
+                    </div>
+                  </div>
+                  <!-- Parceiro 3 -->
+                  <div class="partnerItem">
+                    <div class="partnerPhoto">
+                      <img src="assets/parceiros/parceiro3/fotoperfil.jpg" alt="Parceiro 3" loading="lazy">
+                    </div>
+                    <div class="partnerInfo">
+                      <p class="partnerDesc">Descrição do parceiro com foco na especialidade e entrega de valor.</p>
+                      <a href="#" class="partnerLink" target="_blank" rel="noopener">website.com</a>
+                    </div>
+                  </div>
+                  <!-- Parceiro 4 -->
+                  <div class="partnerItem">
+                    <div class="partnerPhoto">
+                      <img src="assets/parceiros/parceiro4/fotoperfil.jpg" alt="Parceiro 4" loading="lazy">
+                    </div>
+                    <div class="partnerInfo">
+                      <p class="partnerDesc">Descrição do parceiro com foco na especialidade e entrega de valor.</p>
+                      <a href="#" class="partnerLink" target="_blank" rel="noopener">website.com</a>
+                    </div>
+                  </div>
+                  <!-- Parceiro 5 -->
+                  <div class="partnerItem">
+                    <div class="partnerPhoto">
+                      <img src="assets/parceiros/parceiro5/fotoperfil.jpg" alt="Parceiro 5" loading="lazy">
+                    </div>
+                    <div class="partnerInfo">
+                      <p class="partnerDesc">Descrição do parceiro com foco na especialidade e entrega de valor.</p>
+                      <a href="#" class="partnerLink" target="_blank" rel="noopener">website.com</a>
+                    </div>
+                  </div>
+                  <!-- Parceiro 6 -->
+                  <div class="partnerItem">
+                    <div class="partnerPhoto">
+                      <img src="assets/parceiros/parceiro6/fotoperfil.jpg" alt="Parceiro 6" loading="lazy">
+                    </div>
+                    <div class="partnerInfo">
+                      <p class="partnerDesc">Descrição do parceiro com foco na especialidade e entrega de valor.</p>
+                      <a href="#" class="partnerLink" target="_blank" rel="noopener">website.com</a>
+                    </div>
+                  </div>
+                  <!-- Parceiro 7 -->
+                  <div class="partnerItem">
+                    <div class="partnerPhoto">
+                      <img src="assets/parceiros/parceiro7/fotoperfil.jpg" alt="Parceiro 7" loading="lazy">
+                    </div>
+                    <div class="partnerInfo">
+                      <p class="partnerDesc">Descrição do parceiro com foco na especialidade e entrega de valor.</p>
+                      <a href="#" class="partnerLink" target="_blank" rel="noopener">website.com</a>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Mobile Navigation -->
+                <div class="partnersNav" aria-hidden="true">
+                  <button class="pNavBtn prev" id="pNavPrev" aria-label="Anterior">‹</button>
+                  <button class="pNavBtn next" id="pNavNext" aria-label="Próximo">›</button>
+                </div>
+              </div>
+
+              <div class="card">
+                <h3>Convite</h3>
+                <p>
+                  Se você representa uma solução, consultoria ou comunidade que acredita em desenvolvimento humano
+                  aplicado ao trabalho, vamos conversar para explorar sinergias.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- 7) Diferenciais -->
+          <article class="chapter" data-tab="diferenciais">
+            <div class="chapterStage">
+              <div class="chapterTitle">
+                <div>
+                  <h2 class="glowText">Por que escolher a LENS?</h2>
+                  <p class="lede">O que faz diferença é transformar conhecimento em prática com coerência, foco e
+                    consistência.</p>
+                </div>
+              </div>
+
+              <div class="whyGrid">
+                <div class="whyList">
+                  <div class="why">
+                    <div class="whyIcon" aria-hidden="true">⌁</div>
+                    <div><b>Do técnico ao humano</b><span>Integramos dados, método e desenvolvimento humano para
+                        transformar diagnóstico em decisão e ação.</span></div>
+                  </div>
+
+                  <div class="why">
+                    <div class="whyIcon" aria-hidden="true">⟲</div>
+                    <div><b>Desenvolvimento em cada interação</b><span>O desenvolvimento começa no primeiro contato e
+                        continua durante a entrega e no pós: cada conversa vira conhecimento, prática e evolução.</span>
+                    </div>
+                  </div>
+
+                  <div class="why">
+                    <div class="whyIcon" aria-hidden="true">◎</div>
+                    <div><b>Foco em demanda real (e compromisso real)</b><span>Trabalhamos com objetivos que têm
+                        contexto e intenção de execução: “quero X, não sei como, não tenho tudo hoje, mas vou construir
+                        o caminho”.</span>
+                    </div>
+                  </div>
+
+                  <div class="why">
+                    <div class="whyIcon" aria-hidden="true">✶</div>
+                    <div><b>Adaptação contínua ao cenário</b><span>Ferramentas e abordagens personalizadas, ajustadas ao
+                        que o cliente vive e ao que a operação permite, sem perder consistência.</span></div>
+                  </div>
+                </div>
+
+                <div class="toolsBox">
+                  <h3>Ferramentas e metodologias</h3>
+                  <p>Coaching • People Analytics • Design Thinking • Métodos Ágeis • Gestão por Competências • DISC •
+                    HSE (NR1) • SWOT</p>
+                </div>
+
+                <div class="ctaRow">
+                  <div class="ctaText">Vamos começar a descomplicar o desenvolvimento humano no seu contexto de
+                    trabalho?</div>
+                  <div class="btnRow">
+                    <button class="btn primary" type="button" id="openServicesInline" aria-haspopup="dialog"
+                      aria-controls="servicesModal">Conheça nossos serviços</button>
+                    <a class="btn" href="https://calendly.com/lisandra-lencina/lens-by-lis" target="_blank"
+                      rel="noopener">Agendar
+                      conversa</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+    </div>
+    <nav class="sideNav" aria-label="Navegação de capítulos">
+      <button type="button" class="navArrow prev" id="prevCap" aria-label="Capítulo anterior">‹</button>
+      <button type="button" class="navArrow next" id="nextCap" aria-label="Próximo capítulo">›</button>
+    </nav>
+
+    <!-- Redes sociais -->
+    <nav class="socialLinks" aria-label="Redes sociais">
+      <a href="https://www.linkedin.com/in/lisandralencina/" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor"
+            d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0.5 23.5h4V7.5h-4v16zM8 7.5h3.84v2.19h.05c.53-1 1.84-2.06 3.79-2.06 4.06 0 4.82 2.67 4.82 6.14v9.73h-4v-8.63c0-2.06-.04-4.71-2.87-4.71-2.87 0-3.31 2.24-3.31 4.56v8.78H8v-16z" />
+        </svg>
+      </a>
+
+      <a href="https://www.instagram.com/lis_lencina" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor"
+            d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 4.2A3.8 3.8 0 1 1 8.2 12 3.8 3.8 0 0 1 12 8.2zm0 2A1.8 1.8 0 1 0 13.8 12 1.8 1.8 0 0 0 12 10.2zM17.6 6.3a1 1 0 1 1-1 1 1 1 0 0 1 1-1z" />
+        </svg>
+      </a>
+
+      <a href="https://wa.me/5511945152088" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor"
+            d="M20.52 3.48A11.94 11.94 0 0 0 12.03 0C5.45 0 .12 5.33.12 11.91c0 2.1.55 4.15 1.6 5.97L0 24l6.32-1.66a11.86 11.86 0 0 0 5.71 1.46h.01c6.58 0 11.91-5.33 11.91-11.91 0-3.18-1.24-6.17-3.43-8.41zM12.03 21.8h-.01a9.9 9.9 0 0 1-5.04-1.38l-.36-.22-3.75.99 1-3.65-.23-.38a9.88 9.88 0 0 1-1.52-5.26C2.12 6.45 6.58 2 12.03 2c2.65 0 5.14 1.03 7.01 2.9a9.86 9.86 0 0 1 2.9 7.01c0 5.45-4.45 9.89-9.91 9.89z" />
+        </svg>
+      </a>
+
+
+      <a href="https://x.com/" target="_blank" rel="noopener" aria-label="X">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor"
+            d="M18.98 2H22l-6.6 7.55L23.5 22h-6.45l-5.06-6.62L5.2 22H2l7.06-8.08L1.5 2h6.56l4.56 5.98L18.98 2zm-1.13 18h1.79L7.46 3.93H5.58L17.85 20z" />
+        </svg>
+      </a>
+    </nav>
+
+    <nav class="legalLinks" aria-label="Links legais">
+      <a href="termos.html">Termos de uso</a>
+      <span class="legalLinks__sep" aria-hidden="true">|</span>
+      <a href="privacidade.html">Privacidade</a>
+      <span class="legalLinks__sep" aria-hidden="true">|</span>
+      <a href="cookies.html">Política de cookies</a>
+      <span class="legalLinks__sep" aria-hidden="true">|</span>
+      <a href="cookies-preferencias.html">Preferências de cookies</a>
+    </nav>
+
+    <footer class="siteFooter" aria-label="Direitos autorais">
+      © 2026 Todos os direitos reservados. Lencina Estrategia e Gestao de Negocios e Pessoas LTDA.
+    </footer>
+
+  </main>
+
+  <!-- MODAL: serviços -->
+  <section class="modal" id="servicesModal" aria-hidden="true" role="dialog" aria-modal="true"
+    aria-labelledby="servicesTitle">
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__panel" role="document">
+      <div class="modal__top">
+        <div>
+          <h2 class="modal__title" id="servicesTitle">Escolha seu caminho</h2>
+        </div>
+        <button class="iconBtn" type="button" aria-label="Fechar" data-close>✕</button>
+      </div>
+
+      <p class="modal__desc">
+        Selecione o tipo de serviço. Cada opção levará para uma página dedicada (você pode criar depois).
+      </p>
+
+      <div class="grid" aria-label="Opções de serviços">
+        <a class="pick" href="pessoas.html">
+          <div>
+            <strong>Para pessoas</strong>
+            <span>Carreira, repertório e execução com método.</span>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="pick" href="empresas.html">
+          <div>
+            <strong>Para empresas</strong>
+            <span>Diagnóstico, estratégia e desenvolvimento organizacional.</span>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="pick" href="parceiros.html">
+          <div>
+            <strong>Para parceiros</strong>
+            <span>Projetos em conjunto e alavancas de impacto.</span>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      const chips = Array.from(document.querySelectorAll('.chip[data-tab]'));
+      const chapters = Array.from(document.querySelectorAll('.chapter[data-tab]'));
+      const capLabel = document.getElementById('capLabel');
+      const capBar = document.getElementById('capBar');
+      const total = chips.length;
+      const aboutRoot = document.querySelector('.about');
+
+      function setProgress(activeIndex) {
+        capLabel.textContent = 'Capítulo ' + (activeIndex + 1) + ' de ' + total;
+        capBar.style.width = Math.round(((activeIndex + 1) / total) * 100) + '%';
+      }
+
+      function show(tab) {
+        const activeChip = chips.findIndex(c => c.classList.contains('is-active'));
+        const nextIndex = chips.findIndex(c => c.dataset.tab === tab);
+
+        if (nextIndex === -1) return;
+
+        const current = chapters.find(c => c.classList.contains('is-active'));
+        const next = chapters.find(c => c.dataset.tab === tab);
+
+        chips.forEach(c => {
+          const on = c.dataset.tab === tab;
+          c.classList.toggle('is-active', on);
+          c.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+
+        if (current && current !== next) {
+          current.classList.remove('chapterAnim');
+          current.classList.add('chapterAnimOut');
+          window.setTimeout(() => {
+            current.classList.remove('is-active', 'chapterAnimOut');
+            next.classList.add('is-active', 'chapterAnim');
+          }, 210);
+        } else {
+          next.classList.add('is-active', 'chapterAnim');
+        }
+
+        setProgress(nextIndex);
+        if (aboutRoot) {
+          aboutRoot.classList.toggle('hasPhoto', tab === 'quem');
+          aboutRoot.classList.toggle('is-wine', tab === 'fundadora');
+        }
+        // ajuda a manter leitura consistente em telas menores
+        const panel = document.getElementById('panel');
+        if (panel) panel.scrollTop = 0;
+      }
+
+      chips.forEach(btn => {
+        btn.addEventListener('click', () => {
+          show(btn.dataset.tab);
+          const nav = document.querySelector('.chapterNav');
+          if (nav) nav.classList.remove('is-open');
+        });
+      });
+
+      // Dropdown mobile toggle
+      const chipDropdownBtn = document.getElementById('chipDropdownBtn');
+      const chapterNav = document.querySelector('.chapterNav');
+
+      if (chipDropdownBtn && chapterNav) {
+        chipDropdownBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          chapterNav.classList.toggle('is-open');
+        });
+
+        document.addEventListener('click', (e) => {
+          if (!chapterNav.contains(e.target)) {
+            chapterNav.classList.remove('is-open');
+          }
+        });
+      }
+
+      setProgress(0);
+
+      // Foto de fundo somente no capítulo "Quem somos"
+      const initialTab = (chips.find(c => c.classList.contains('is-active')) || chips[0])?.dataset?.tab || 'quem';
+      if (aboutRoot) {
+        aboutRoot.classList.toggle('hasPhoto', initialTab === 'quem');
+        aboutRoot.classList.toggle('is-wine', initialTab === 'fundadora');
+      }
+
+      // Modal (serviços)
+      const servicesModal = document.getElementById('servicesModal');
+      const openers = [
+        document.getElementById('openServicesTop'),
+        document.getElementById('openServicesInline')
+      ].filter(Boolean);
+
+      function openModal() {
+        servicesModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeModal() {
+        servicesModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = 'hidden';
+      }
+
+      openers.forEach(a => {
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          openModal();
+        });
+      });
+
+      servicesModal.addEventListener('click', (e) => {
+        if (e.target && e.target.hasAttribute('data-close')) closeModal();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && servicesModal.getAttribute('aria-hidden') === 'false') {
+          closeModal();
+        }
+      });
+
+      // More Menu Toggle
+      const moreBtn = document.getElementById('moreBtn');
+      const moreMenu = document.getElementById('moreMenu');
+
+      if (moreBtn && moreMenu) {
+        moreBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const isOpen = moreMenu.classList.contains('is-open');
+          moreMenu.classList.toggle('is-open', !isOpen);
+          moreBtn.setAttribute('aria-expanded', !isOpen);
+        });
+
+        document.addEventListener('click', (e) => {
+          if (!moreMenu.contains(e.target) && e.target !== moreBtn) {
+            moreMenu.classList.remove('is-open');
+            moreBtn.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+
+      // Sequential Chapter Navigation
+      const prevBtn = document.getElementById('prevCap');
+      const nextBtn = document.getElementById('nextCap');
+
+      function updateNavArrows(index) {
+        if (!prevBtn || !nextBtn) return;
+        prevBtn.classList.toggle('is-hidden', index === 0);
+        nextBtn.classList.toggle('is-hidden', index === total - 1);
+      }
+
+      function navigateChapter(direction) {
+        const activeIndex = chips.findIndex(c => c.classList.contains('is-active'));
+        const nextIndex = activeIndex + direction;
+        if (nextIndex >= 0 && nextIndex < total) {
+          show(chips[nextIndex].dataset.tab);
+        }
+      }
+
+      if (prevBtn) prevBtn.addEventListener('click', () => navigateChapter(-1));
+      if (nextBtn) nextBtn.addEventListener('click', () => navigateChapter(1));
+
+      // Hook into existing show function to update arrows
+      const originalShow = show;
+      show = function (tab) {
+        originalShow(tab);
+        const index = chips.findIndex(c => c.dataset.tab === tab);
+        updateNavArrows(index);
+      };
+
+      // Initial state
+      const initialIdx = chips.findIndex(c => c.classList.contains('is-active'));
+      updateNavArrows(initialIdx !== -1 ? initialIdx : 0);
+    })();
+  </script>
+  <script>
+    function confirmLink(event, url) {
+      event.preventDefault(); // Impede a ação padrão imediata
+      if (confirm("Você deseja abrir este link externo?")) {
+        window.open(url, '_blank');
+      }
+    }
+  </script>
+</body>
+
+</html>
