@@ -267,7 +267,7 @@
       }
 
       100% {
-        transform: translate3d(-1.2%, -0.8%, 0) scale(1.03);
+        transform: translate3d(-1%, -0.5%, 0) scale(1.03);
         filter: saturate(1.05) brightness(1.00);
       }
     }
@@ -279,7 +279,7 @@
       }
 
       100% {
-        transform: translate3d(1.2%, -0.8%, 0);
+        transform: translate3d(0.5%, -0.3%, 0);
         opacity: .58;
       }
     }
@@ -290,7 +290,7 @@
       }
 
       100% {
-        transform: translate3d(2.2vw, -1.6vh, 0) scale(1.02) rotate(6deg);
+        transform: translate3d(1.5vw, -1vh, 0) scale(1.01) rotate(4deg);
       }
     }
 
@@ -298,19 +298,11 @@
       0% {
         transform: translate3d(0, 0, 0) scale(1.01);
         filter: saturate(1.00) brightness(.92);
-        background-position: 50% 50%;
-      }
-
-      50% {
-        transform: translate3d(-0.6%, -0.4%, 0) scale(1.02);
-        filter: saturate(1.03) brightness(.95);
-        background-position: 46% 48%;
       }
 
       100% {
-        transform: translate3d(0.8%, 0.5%, 0) scale(1.03);
-        filter: saturate(1.05) brightness(.97);
-        background-position: 54% 52%;
+        transform: translate3d(0.5%, 0.3%, 0) scale(1.02);
+        filter: saturate(1.04) brightness(.96);
       }
     }
 
@@ -318,22 +310,37 @@
       0% {
         transform: translate3d(0, 0, 0) scale(1.00);
         opacity: .86;
-        background-position: 50% 50%;
-      }
-
-      50% {
-        transform: translate3d(-0.4%, 0.2%, 0) scale(1.01);
-        opacity: 1;
-        background-position: 47% 52%;
       }
 
       100% {
-        transform: translate3d(0.6%, -0.3%, 0) scale(1.02);
-        opacity: .90;
-        background-position: 53% 49%;
+        transform: translate3d(0.4%, -0.2%, 0) scale(1.01);
+        opacity: .94;
       }
     }
 
+    @media (max-width: 860px) {
+
+      .about__bg,
+      .about__bg::after,
+      .about__overlay::after,
+      .orb,
+      .about__glow::before {
+        animation-duration: 40s !important;
+        /* Slow down for mobile */
+        filter: none !important;
+        /* Disable expensive filters on mobile */
+      }
+
+      .about__glow {
+        filter: none !important;
+      }
+
+      .orb {
+        filter: blur(15px) !important;
+      }
+
+      /* Reduce blur radius */
+    }
 
     @media (prefers-reduced-motion: reduce) {
 
@@ -354,9 +361,9 @@
       width: min(var(--max), 100%);
       height: min(760px, calc(100svh - 2 * clamp(14px, 2.6vw, 28px)));
       display: grid;
-      grid-template-rows: auto auto 1fr;
-      gap: 6px;
-      /* Reduzido de 12px para 6px */
+      grid-template-rows: auto auto auto 1fr;
+      gap: 4px;
+      /* Reduced from 6px */
       z-index: 2;
       pointer-events: none;
     }
@@ -374,8 +381,8 @@
       align-items: center;
       justify-content: center;
       gap: 12px;
-      padding-top: 93px;
-      /* espaço para o título central no topo */
+      padding-top: 85px;
+      /* Slightly reduced */
       z-index: 10;
       overflow: visible;
     }
@@ -552,15 +559,12 @@
         display: block;
         width: auto;
         padding: 10px 0;
-      }
-
-      .chip:not(:last-child)::after {
-        display: none !important;
+        margin-top: 20px !important;
       }
 
       .chipDropdownTrigger {
         display: flex;
-        margin-top: 0;
+        margin-top: 20px !important;
       }
 
       /* Estado Aberto (Dropdown) */
@@ -604,7 +608,79 @@
 
       .chapterNav.is-open .chip.is-active .chipText::before {
         display: none;
-        /* Esconde o farol dentro do dropdown para não poluir */
+      }
+    }
+
+    /* Scattered styles consolidated from body */
+    article.chapter[data-tab="problemas1"] .chapterTitle {
+      justify-content: center;
+      text-align: center;
+    }
+
+    article.chapter[data-tab="problemas1"] .chapterTitle .lede {
+      margin: 8px auto 0;
+      max-width: 800px;
+    }
+
+    .servicesContainer {
+      position: relative;
+      width: 100%;
+      min-height: 480px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .triadContainer {
+      position: relative;
+      width: 380px;
+      height: 380px;
+      top: -15%;
+      transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+      z-index: 2;
+    }
+
+    .servicesContainer.is-active .triadContainer {
+      transform: translate3d(-210px, 0, 0);
+      /* GPU Accelerated */
+    }
+
+    .triadCircle {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 1px solid rgba(233, 213, 255, .3);
+      background: rgba(124, 58, 237, .15);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.3;
+      cursor: pointer;
+      transition: transform 0.4s ease, background 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      will-change: transform;
+    }
+
+    @media (max-width: 860px) {
+      .triadCircle {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: rgba(124, 58, 237, 0.45) !important;
+        width: 140px !important;
+        height: 140px !important;
+      }
+
+      .servicesContainer {
+        min-height: auto;
       }
     }
 
@@ -2350,6 +2426,43 @@
       }
     }
 
+    /* Tablet adjustments to prevent footer overlap */
+    @media (max-width: 1024px) and (min-width: 768px) {
+      .topbar {
+        padding-top: 60px;
+      }
+
+      .socialLinks {
+        bottom: calc(60px + env(safe-area-inset-bottom));
+      }
+
+      .socialLinks a {
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+      }
+
+      .socialLinks svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      .legalLinks {
+        bottom: calc(30px + env(safe-area-inset-bottom));
+        font-size: 11px;
+      }
+
+      .siteFooter {
+        bottom: calc(8px + env(safe-area-inset-bottom));
+        font-size: 11px;
+      }
+
+      .panelInner {
+        padding-top: 5px;
+        padding-bottom: 5px;
+      }
+    }
+
     /* ========= LINKS LEGAIS + RODAPE (igual ao index) ========= */
     .legalLinks {
       position: absolute;
@@ -2606,7 +2719,7 @@
         min-height: 0 !important;
         display: flex !important;
         flex-direction: column !important;
-        gap: 24px !important;
+        gap: 12px !important;
       }
 
       .chapter {
@@ -2618,7 +2731,11 @@
         height: auto !important;
         display: flex !important;
         flex-direction: column !important;
-        gap: 24px !important;
+        gap: 12px !important;
+      }
+
+      .chapterTitle {
+        margin-top: -15px !important;
       }
 
       body {
@@ -2961,10 +3078,124 @@
 
     .moreMenu a:hover,
     .moreMenu button:hover {
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, .08);
       color: #fff;
-      padding-left: 20px;
     }
+
+    /* Tablet/Small Screen Adjustments (e.g. 1266x771) to prevent footer overlap */
+    @media (max-width: 1400px) and (max-height: 820px) {
+      .topbar {
+        padding-top: 55px;
+      }
+
+      .chapterNav {
+        padding-top: 8px;
+        margin-top: -10px;
+      }
+
+      .socialLinks {
+        bottom: 52px;
+      }
+
+      .socialLinks a {
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+      }
+
+      .socialLinks svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      .legalLinks {
+        bottom: 28px;
+        font-size: 11px;
+        gap: 8px;
+      }
+
+      .siteFooter {
+        bottom: 8px;
+        font-size: 10.5px;
+      }
+
+      .chapterTitle h2 {
+        font-size: clamp(18px, 1.8vw, 24px) !important;
+      }
+
+      .lede {
+        font-size: 13.5px !important;
+        margin-top: 4px !important;
+      }
+
+      /* Diferenciais adjustments */
+      .whyGrid {
+        gap: 12px !important;
+      }
+
+      .why {
+        padding: 8px 10px !important;
+      }
+
+      .whyIcon {
+        width: 24px !important;
+        height: 24px !important;
+        flex: 0 0 24px !important;
+      }
+
+      .why b {
+        font-size: 13px !important;
+      }
+
+      .why span {
+        font-size: 12.5px !important;
+      }
+
+      .toolsBox {
+        padding: 10px 12px !important;
+      }
+
+      .toolsBox h3 {
+        font-size: 13px !important;
+        margin-bottom: 4px !important;
+      }
+
+      .toolsBox p {
+        font-size: 12.5px !important;
+      }
+
+      .ctaRow {
+        margin-top: 2px !important;
+        gap: 8px !important;
+      }
+
+      .ctaText {
+        font-size: 13.5px !important;
+      }
+
+      .btn {
+        padding: 8px 12px !important;
+        font-size: 13px !important;
+      }
+
+      /* Parceiros Convite adjustment */
+      .chapter[data-tab="parceiros"] .card {
+        margin-top: -15px !important;
+      }
+
+      /* Top navigation scaling */
+      .navBtn {
+        padding: 11px 16px !important;
+        font-size: 12.5px !important;
+      }
+
+      .navBtn.more {
+        padding: 8.5px 13px !important;
+        font-size: 15px !important;
+      }
+    }
+
+
 
     /* ========= SIDE NAVIGATION ARROWS ========= */
     .sideNav {
@@ -3052,8 +3283,7 @@
         height: auto !important;
         min-height: 0 !important;
         width: 100% !important;
-        display: flex !important;
-        flex-direction: column !important;
+        display: block !important;
         pointer-events: none !important;
         margin-bottom: 20px !important;
       }
@@ -3062,12 +3292,21 @@
         pointer-events: auto !important;
       }
 
+      .topbar {
+        padding-top: 50px !important;
+        /* Reduced for tighter look */
+        min-height: auto !important;
+      }
+
       .panel {
         position: relative !important;
         overflow: visible !important;
         height: auto !important;
         min-height: 0 !important;
         display: block !important;
+        margin-top: -15px !important;
+        /* Pull up to reduce gap */
+        /* Avoid overlap */
       }
 
       .panelInner {
@@ -3075,7 +3314,7 @@
         min-height: 0 !important;
         display: flex !important;
         flex-direction: column !important;
-        gap: 24px !important;
+        gap: 16px !important;
         padding-bottom: 20px !important;
       }
 
@@ -3084,7 +3323,7 @@
         min-height: 0 !important;
         overflow: visible !important;
         display: none;
-        /* show logic remains in scripts */
+        /* Show logic remains in scripts */
       }
 
       .chapter.is-active {
@@ -3092,13 +3331,73 @@
         flex-direction: column !important;
       }
 
+      .chapterNav {
+        margin: 0 0 15px !important;
+        /* Spacing for when it's above chapter title */
+        padding-top: 0 !important;
+        position: relative !important;
+        z-index: 101 !important;
+        width: 100% !important;
+      }
+
+      .hintRow {
+        margin-top: 8px !important;
+      }
+
       .chapterStage {
         height: auto !important;
         min-height: 0 !important;
         display: flex !important;
         flex-direction: column !important;
-        gap: 24px !important;
+        gap: 16px !important;
+        /* Reduced from 24px */
         padding: 0 20px !important;
+      }
+
+      .chapterTitle {
+        margin-bottom: 0 !important;
+      }
+
+      .chapterTitle h1,
+      .chapterTitle h2 {
+        font-size: 22px !important;
+        margin-top: 0 !important;
+        margin-bottom: 8px !important;
+      }
+
+      .lede {
+        margin-top: 0 !important;
+        line-height: 1.4 !important;
+      }
+
+      .titems {
+        height: auto !important;
+        min-height: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 16px !important;
+      }
+
+      .tline {
+        height: auto !important;
+        min-height: 0 !important;
+        padding-bottom: 20px !important;
+      }
+
+      .value {
+        align-items: flex-start !important;
+        padding: 12px !important;
+      }
+
+      .value span {
+        white-space: normal !important;
+      }
+
+      .scenarioOverlay,
+      .dhoHeader {
+        height: auto !important;
+        min-height: 64px !important;
+        padding: 12px 16px !important;
       }
 
       /* Força elementos do rodapé a seguirem o fluxo normal */
@@ -3208,32 +3507,32 @@
           <span class="brand__name"><span class="brand__dot" aria-hidden="true"></span>Lens by Lis</span>
           <span class="brand__tag">Sobre nós</span>
         </a>
-
-        <nav class="chapterNav" aria-label="Capítulos">
-          <button class="chipDropdownTrigger" type="button" id="chipDropdownBtn" aria-label="Ver mais seções">
-            <svg width="12" height="7" viewBox="0 0 12 7" fill="none" stroke="currentColor" stroke-width="1.8"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M1 1l5 5 5-5" />
-            </svg>
-          </button>
-          <button class="chip is-active" type="button" data-tab="quem" aria-selected="true"><span class="chipText">Quem
-              somos</span></button>
-          <button class="chip" type="button" data-tab="fundadora" aria-selected="false"><span class="chipText">A
-              fundadora</span></button>
-          <button class="chip" type="button" data-tab="valores" aria-selected="false"><span class="chipText">Missão e
-              valores</span></button>
-          <button class="chip" type="button" data-tab="problemas1" aria-selected="false"><span class="chipText">Cenário
-              atual</span></button>
-          <button class="chip" type="button" data-tab="problemas2" aria-selected="false"><span class="chipText">Impactos
-              do cenário</span></button>
-          <button class="chip" type="button" data-tab="servicos" aria-selected="false"><span class="chipText">Como
-              ajudamos</span></button>
-          <button class="chip" type="button" data-tab="parceiros" aria-selected="false"><span
-              class="chipText">Parceiros</span></button>
-          <button class="chip" type="button" data-tab="diferenciais" aria-selected="false"><span
-              class="chipText">Diferenciais</span></button>
-        </nav>
       </div>
+
+      <nav class="chapterNav" aria-label="Capítulos">
+        <button class="chipDropdownTrigger" type="button" id="chipDropdownBtn" aria-label="Ver mais seções">
+          <svg width="12" height="7" viewBox="0 0 12 7" fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 1l5 5 5-5" />
+          </svg>
+        </button>
+        <button class="chip is-active" type="button" data-tab="quem" aria-selected="true"><span class="chipText">Quem
+            somos</span></button>
+        <button class="chip" type="button" data-tab="fundadora" aria-selected="false"><span class="chipText">A
+            fundadora</span></button>
+        <button class="chip" type="button" data-tab="valores" aria-selected="false"><span class="chipText">Missão e
+            valores</span></button>
+        <button class="chip" type="button" data-tab="problemas1" aria-selected="false"><span class="chipText">Cenário
+            atual</span></button>
+        <button class="chip" type="button" data-tab="problemas2" aria-selected="false"><span class="chipText">Impactos
+            do cenário</span></button>
+        <button class="chip" type="button" data-tab="servicos" aria-selected="false"><span class="chipText">Como
+            ajudamos</span></button>
+        <button class="chip" type="button" data-tab="parceiros" aria-selected="false"><span
+            class="chipText">Parceiros</span></button>
+        <button class="chip" type="button" data-tab="diferenciais" aria-selected="false"><span
+            class="chipText">Diferenciais</span></button>
+      </nav>
 
       <div class="hintRow" aria-label="Guia de leitura">
         <div class="progress">
@@ -3464,18 +3763,6 @@
                 </div>
               </div>
 
-              <style>
-                /* Centralizar título e lede da seção Cenário (problemas1) */
-                article.chapter[data-tab="problemas1"] .chapterTitle {
-                  justify-content: center;
-                  text-align: center;
-                }
-
-                article.chapter[data-tab="problemas1"] .chapterTitle .lede {
-                  margin: 8px auto 0;
-                  max-width: 800px;
-                }
-              </style>
 
               <div class="scenarioGrid">
 
@@ -3947,6 +4234,59 @@
                   }
                 }
 
+                /* Tablet/Small Screen Adjustments (e.g. 1266x771) for Triad */
+                @media (max-width: 1400px) and (max-height: 820px) {
+                  .servicesContainer {
+                    min-height: 400px;
+                  }
+
+                  .triadContainer {
+                    width: 310px;
+                    height: 310px;
+                    top: -20%;
+                    margin-left: auto;
+                    margin-right: auto;
+                  }
+
+                  .triadCircle {
+                    width: 160px;
+                    height: 160px;
+                    font-size: 13px;
+                  }
+
+                  .formatsBanner {
+                    margin-top: 0;
+                    font-size: 12px;
+                    padding: 4px 8px;
+                  }
+
+                  .serviceDetails {
+                    width: 50%;
+                    max-width: 360px;
+                    padding-left: 15px;
+                    top: 45%;
+                  }
+
+                  .serviceDetails h3 {
+                    font-size: 18px;
+                    margin-bottom: 8px;
+                  }
+
+                  .detailDesc {
+                    font-size: 13px;
+                    margin-bottom: 8px;
+                  }
+
+                  .detailList li {
+                    font-size: 12.5px;
+                    margin-bottom: 3px;
+                  }
+
+                  .servicesContainer.is-active .triadContainer {
+                    transform: translateX(-160px);
+                  }
+                }
+
                 /* Responsividade */
                 @media (max-width: 860px) {
                   .servicesContainer {
@@ -4408,31 +4748,8 @@
                 })();
               </script>
 
-              <div class="journey" aria-label="Jornada de experiência">
-                <div class="journeyLabel">Fluxo operacional</div>
-                <div class="steps">
-                  <div class="step">
-                    <b>01</b>
-                    <strong>Diagnóstico</strong>
-                    <span>Análise profunda da situação atual</span>
-                  </div>
-                  <div class="step">
-                    <b>02</b>
-                    <strong>Plano de ação</strong>
-                    <span>Estratégia customizada e objetivos claros</span>
-                  </div>
-                  <div class="step">
-                    <b>03</b>
-                    <strong>Execução</strong>
-                    <span>Implementação e consultoria contínua</span>
-                  </div>
-                </div>
-              </div>
 
-              <div class="formats">
-                <span class="hi">Formatos disponíveis:</span> Prateleira (serviços prontos) • Assinatura (anual) •
-                Projetos (3 a 6 meses)
-              </div>
+
             </div>
           </article>
 
@@ -4719,6 +5036,12 @@
         capBar.style.width = Math.round(((activeIndex + 1) / total) * 100) + '%';
       }
 
+      // Cache common selectors to avoid repeated DOM lookups
+      const shell = document.querySelector('.shell');
+      const panel = document.getElementById('panel');
+      const chapterNav = document.querySelector('.chapterNav');
+      const hintRow = document.querySelector('.hintRow');
+
       function show(tab) {
         const activeChip = chips.findIndex(c => c.classList.contains('is-active'));
         const nextIndex = chips.findIndex(c => c.dataset.tab === tab);
@@ -4730,8 +5053,10 @@
 
         chips.forEach(c => {
           const on = c.dataset.tab === tab;
-          c.classList.toggle('is-active', on);
-          c.setAttribute('aria-selected', on ? 'true' : 'false');
+          if (c.classList.contains('is-active') !== on) {
+            c.classList.toggle('is-active', on);
+            c.setAttribute('aria-selected', on ? 'true' : 'false');
+          }
         });
 
         if (current && current !== next) {
@@ -4741,31 +5066,41 @@
             current.classList.remove('is-active', 'chapterAnimOut');
             next.classList.add('is-active', 'chapterAnim');
           }, 210);
-        } else {
+        } else if (!next.classList.contains('is-active')) {
           next.classList.add('is-active', 'chapterAnim');
         }
 
         setProgress(nextIndex);
-        if (aboutRoot) {
-          aboutRoot.classList.toggle('hasPhoto', tab === 'quem');
-          aboutRoot.classList.toggle('is-wine', tab === 'fundadora');
+
+        // Optimized Positioning
+        const isMobile = window.innerWidth <= 860;
+        if (isMobile) {
+          const title = next.querySelector('.chapterTitle');
+          if (title && chapterNav && chapterNav.nextElementSibling !== title) {
+            title.before(chapterNav);
+          }
+        } else if (shell && hintRow && chapterNav && chapterNav.nextElementSibling !== hintRow) {
+          shell.insertBefore(chapterNav, hintRow);
         }
-        // ajuda a manter leitura consistente em telas menores
-        const panel = document.getElementById('panel');
+
+        if (aboutRoot) {
+          requestAnimationFrame(() => {
+            aboutRoot.classList.toggle('hasPhoto', tab === 'quem');
+            aboutRoot.classList.toggle('is-wine', tab === 'fundadora');
+          });
+        }
         if (panel) panel.scrollTop = 0;
       }
 
       chips.forEach(btn => {
         btn.addEventListener('click', () => {
           show(btn.dataset.tab);
-          const nav = document.querySelector('.chapterNav');
-          if (nav) nav.classList.remove('is-open');
+          if (chapterNav) chapterNav.classList.remove('is-open');
         });
       });
 
       // Dropdown mobile toggle
       const chipDropdownBtn = document.getElementById('chipDropdownBtn');
-      const chapterNav = document.querySelector('.chapterNav');
 
       if (chipDropdownBtn && chapterNav) {
         chipDropdownBtn.addEventListener('click', (e) => {
@@ -4780,10 +5115,20 @@
         });
       }
 
-      setProgress(0);
+      const initialTab = (chips.find(c => c.classList.contains('is-active')) || chips[0])?.dataset?.tab || 'quem';
+      show(initialTab);
+
+      // Debounce resize to prevent layout thrashing
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          const activeTab = chips.find(c => c.classList.contains('is-active'))?.dataset.tab || 'quem';
+          show(activeTab);
+        }, 150);
+      });
 
       // Foto de fundo somente no capítulo "Quem somos"
-      const initialTab = (chips.find(c => c.classList.contains('is-active')) || chips[0])?.dataset?.tab || 'quem';
       if (aboutRoot) {
         aboutRoot.classList.toggle('hasPhoto', initialTab === 'quem');
         aboutRoot.classList.toggle('is-wine', initialTab === 'fundadora');
